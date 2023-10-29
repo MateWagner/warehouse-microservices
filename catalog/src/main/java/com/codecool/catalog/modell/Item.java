@@ -1,4 +1,4 @@
-package com.codecool.catalog.model;
+package com.codecool.catalog.modell;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
