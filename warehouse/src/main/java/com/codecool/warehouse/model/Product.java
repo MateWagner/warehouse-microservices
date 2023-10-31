@@ -1,4 +1,5 @@
-package com.codecool.catalog.model;
+package com.codecool.warehouse.model;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,15 +13,15 @@ import lombok.*;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class Item {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String name;
-    String description;
+    Long itemId;
+    Long quantity;
 
-    public Item(String name, String description) {
-        this.name = name;
-        this.description = description;
+    public Product(Long itemId, Long quantity) {
+        this.itemId = itemId;
+        this.quantity = quantity;
     }
 }
