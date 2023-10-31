@@ -1,6 +1,6 @@
 package com.codecool.catalog.repository;
 
-import com.codecool.catalog.modell.Item;
+import com.codecool.catalog.model.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
