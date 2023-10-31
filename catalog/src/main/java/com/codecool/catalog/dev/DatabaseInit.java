@@ -1,6 +1,6 @@
 package com.codecool.catalog.dev;
 
-import com.codecool.catalog.model.Item;
+import com.codecool.catalog.modell.Item;
 import com.codecool.catalog.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
