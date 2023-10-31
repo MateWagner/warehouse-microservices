@@ -15,4 +15,13 @@ public class ProductService {
     public Product getProductByItemId(Long itemId) {
         return productRepository.findByItemId(itemId).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND, "No Product in storage With itemID: " + itemId));
     }
+
+    public boolean getAvailabilityByItemId(Long itemId) {
+        try {
+            Product product = getProductByItemId(itemId);
+            return product.isProductAvailable();
+        } catch (HttpClientErrorException e) {
+            return false;
+        }
+    }
 }

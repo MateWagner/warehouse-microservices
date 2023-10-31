@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
     private final ProductService productService;
 
+    @GetMapping("/available/{itemId}")
+    public boolean getAvailabilityByItemId(@PathVariable Long itemId) {
+        return productService.getAvailabilityByItemId(itemId);
+    }
     @GetMapping("{itemId}")
     public Product getProductByItemId(@PathVariable Long itemId) {
         return productService.getProductByItemId(itemId);
