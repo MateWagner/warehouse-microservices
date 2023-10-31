@@ -20,6 +20,9 @@ public class Product {
     Long itemId;
     Long quantity;
 
+    public boolean isProductAvailable(){
+        return quantity > 0;
+    }
     public Product(Long itemId, Long quantity) {
         this.itemId = itemId;
         this.quantity = quantity;
