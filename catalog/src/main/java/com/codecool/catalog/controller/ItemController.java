@@ -1,6 +1,6 @@
 package com.codecool.catalog.controller;
 
-import com.codecool.catalog.model.Item;
+import com.codecool.catalog.modell.Item;
 import com.codecool.catalog.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
