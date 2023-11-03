@@ -6,6 +6,8 @@ import com.codecool.catalog.repository.ItemRepository;
 import com.codecool.catalog.utils.ItemMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -16,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ItemService {
     private final ItemRepository itemRepository;
-    private WebClient webClient = WebClient.create("http://localhost:8081");
+    private final WebClient webClient;
 
     public List<Item> getAllItem() {
         return itemRepository.findAll();
@@ -25,7 +27,7 @@ public class ItemService {
     public ItemDto getItemDetails(Long itemId) {
         Item item = getItemById(itemId);
         Boolean isAvailable = webClient.get()
-                .uri("/api/warehouse/v1/product/available/"+itemId)
+                .uri("http://localhost:8081/api/warehouse/v1/product/available/"+itemId)
                 .retrieve()
                 .bodyToMono(Boolean.class)
                 .block();
