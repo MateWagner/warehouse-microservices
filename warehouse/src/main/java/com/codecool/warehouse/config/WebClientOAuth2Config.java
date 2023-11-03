@@ -9,6 +9,8 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizedClientManager;
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
 import org.springframework.security.oauth2.client.web.reactive.function.client.ServletOAuth2AuthorizedClientExchangeFilterFunction;
+import org.springframework.security.oauth2.server.resource.authentication.DelegatingJwtGrantedAuthoritiesConverter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.web.reactive.function.client.WebClient;
 
 /**
@@ -19,8 +21,9 @@ public class WebClientOAuth2Config {
 
     /**
      * First creating a bean for Oauth2AuthorizedClientManager.
+     *
      * @param clientRegistrationRepository (autowired by spring).
-     * @param authorizedClientRepository  (autowired by spring).
+     * @param authorizedClientRepository   (autowired by spring).
      * @return OAuth2AuthorizedClientManager.
      */
     @Bean
@@ -41,6 +44,7 @@ public class WebClientOAuth2Config {
 
     /**
      * WebClient for our downstream client here i.e `my-client`.
+     *
      * @param authorizedClientManager authorizedClientManager
      * @return WebClient
      */
@@ -51,5 +55,18 @@ public class WebClientOAuth2Config {
                 authorizedClientManager);
         oauth2Client.setDefaultClientRegistrationId("keycloak");
         return WebClient.builder().filter(oauth2Client).build();
+    }
+
+    @Bean
+    public DelegatingJwtGrantedAuthoritiesConverter authoritiesConverter(
+            KeycloakJwtRolesConverter keycloakJwtRolesConverter,
+            JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter
+    ) {
+        return new DelegatingJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter, keycloakJwtRolesConverter);
+    }
+
+    @Bean
+    JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter() {
+        return new JwtGrantedAuthoritiesConverter();
     }
 }
