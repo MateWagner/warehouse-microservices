@@ -16,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ItemService {
     private final ItemRepository itemRepository;
-    private WebClient webClient = WebClient.create("http://localhost:8081");
+    private final WebClient webClient;
 
     public List<Item> getAllItem() {
         return itemRepository.findAll();
@@ -25,7 +25,7 @@ public class ItemService {
     public ItemDto getItemDetails(Long itemId) {
         Item item = getItemById(itemId);
         Boolean isAvailable = webClient.get()
-                .uri("/api/warehouse/v1/product/available/"+itemId)
+                .uri("http://localhost:8081/api/warehouse/v1/product/available/"+itemId)
                 .retrieve()
                 .bodyToMono(Boolean.class)
                 .block();
