@@ -3,7 +3,9 @@ package com.codecool.catalog.controller;
 import com.codecool.catalog.dto.ItemDto;
 import com.codecool.catalog.modell.Item;
 import com.codecool.catalog.service.ItemService;
+import com.codecool.catalog.utils.KeycloakJwtRolesConverter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/catalog/v1/item")
+@RequestMapping("/api/v1/item")
 @RequiredArgsConstructor
 public class ItemController {
     private final ItemService itemService;

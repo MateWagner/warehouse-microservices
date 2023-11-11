@@ -26,8 +26,9 @@ public class ItemService {
 
     public ItemDto getItemDetails(Long itemId) {
         Item item = getItemById(itemId);
-        Boolean isAvailable = webClient.get()
-                .uri("http://localhost:8081/api/warehouse/v1/product/available/"+itemId)
+        Boolean isAvailable =
+                webClient.get()
+                .uri("http://app/warehouse/api/v1/product/available/"+itemId)
                 .retrieve()
                 .bodyToMono(Boolean.class)
                 .block();
