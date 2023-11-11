@@ -1,0 +1,78 @@
+{
+  "realm" : "warehouse-microservices",
+  "users" : [ {
+    "id" : "3fae8b1d-cd0b-4dae-8d7e-e3d234941058",
+    "createdTimestamp" : 1698919722187,
+    "username" : "admin",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : false,
+    "credentials" : [ {
+      "id" : "bebfc8d2-ff57-4cae-8263-c4606879569a",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1698919740482,
+      "secretData" : "{\"value\":\"0H0tXz9FYeit29fNIlRg8+m3xVTOHlstTqgIubN/HhE=\",\"salt\":\"Mmf5WxBq47+K3aUFxfNU6g==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "ADMIN", "default-roles-warehouse-microservices" ],
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
+    "id" : "4f0071a5-6980-4da5-bc71-4157abb359e9",
+    "createdTimestamp" : 1699003539833,
+    "username" : "service-account-catalog-service",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : false,
+    "serviceAccountClientId" : "catalog-service",
+    "credentials" : [ ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-warehouse-microservices" ],
+    "clientRoles" : {
+      "catalog-service" : [ "uma_protection" ]
+    },
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
+    "id" : "f8b38b96-a0cf-4eb1-97f7-bec724cb036f",
+    "createdTimestamp" : 1698922454597,
+    "username" : "service-account-warehouse-service",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : false,
+    "serviceAccountClientId" : "warehouse-service",
+    "credentials" : [ ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-warehouse-microservices" ],
+    "clientRoles" : {
+      "warehouse-service" : [ "uma_protection" ]
+    },
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
+    "id" : "fc7d4e82-931e-4e69-9ce7-8724653489f1",
+    "createdTimestamp" : 1698919864217,
+    "username" : "user",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : false,
+    "credentials" : [ {
+      "id" : "6559cf31-153f-41d5-a314-d9046f9f4942",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1698919880412,
+      "secretData" : "{\"value\":\"3sTXSRvpf6Hj+46xO9j5f5u6fqObe05SwPdAjemYVSM=\",\"salt\":\"/10SwOsj9K873JDtWuMGSA==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-warehouse-microservices", "user" ],
+    "notBefore" : 0,
+    "groups" : [ ]
+  } ]
+}
