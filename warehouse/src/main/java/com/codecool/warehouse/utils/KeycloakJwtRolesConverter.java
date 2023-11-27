@@ -1,4 +1,4 @@
-package com.codecool.catalog.config;
+package com.codecool.warehouse.utils;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.GrantedAuthority;

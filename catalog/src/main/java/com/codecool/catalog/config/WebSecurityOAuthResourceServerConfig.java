@@ -1,5 +1,6 @@
-package com.codecool.warehouse.config;
+package com.codecool.catalog.config;
 
+import com.codecool.catalog.utils.KeycloakJwtRolesConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,9 +11,9 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 @RequiredArgsConstructor
-class SecurityConfig {
+class WebSecurityOAuthResourceServerConfig {
     private final DelegatingJwtGrantedAuthoritiesConverter authoritiesConverter;
 
     @Bean
@@ -20,14 +21,19 @@ class SecurityConfig {
 
         http
                 .authorizeHttpRequests(access -> access
-                        .requestMatchers("/api/warehouse/v1/product/available/**").hasAuthority("SCOPE_system")
+                        .requestMatchers("/api/v1/item").hasAuthority(KeycloakJwtRolesConverter.PREFIX_REALM_ROLE + "ADMIN")
                         .anyRequest().authenticated()
                 )
-                .oauth2ResourceServer(rs -> rs.jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(
-                        jwt -> new JwtAuthenticationToken(jwt, authoritiesConverter.convert(jwt))
-                )));
+                .oauth2ResourceServer(rs -> rs
+                        .jwt(jwtConfigurer -> jwtConfigurer
+                                .jwtAuthenticationConverter(jwt ->
+                                        new JwtAuthenticationToken(jwt, authoritiesConverter.convert(jwt))
+                                )
+                        )
+                );
+
         return http.build();
     }
-
 }
+
 
