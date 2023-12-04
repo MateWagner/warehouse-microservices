@@ -1,11 +1,9 @@
 package com.codecool.catalog.utils;
 
 import com.codecool.catalog.dto.CategoryDTO;
-import com.codecool.catalog.dto.CategoryTreeDTO;
 import com.codecool.catalog.modell.Category;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 

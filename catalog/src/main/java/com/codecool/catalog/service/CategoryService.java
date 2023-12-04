@@ -24,11 +24,6 @@ public class CategoryService {
         return ResponseEntity.ofNullable(categoriesDTO);
     }
 
-    public List<Category> getCategoryThree(UUID categoryPID) {
-        Category category = getCategoryByPublicID(categoryPID);
-
-    }
-
     protected Category getCategoryByPublicID(UUID categoryPID) {
         return categoryRepository.getOneByPublicId(categoryPID)
                 .orElseThrow(() -> new HttpClientErrorException(
