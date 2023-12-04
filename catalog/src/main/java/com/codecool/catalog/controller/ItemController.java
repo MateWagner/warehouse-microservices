@@ -1,30 +1,35 @@
 package com.codecool.catalog.controller;
 
 import com.codecool.catalog.dto.ItemDto;
-import com.codecool.catalog.modell.Item;
 import com.codecool.catalog.service.ItemService;
-import com.codecool.catalog.utils.KeycloakJwtRolesConverter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/item")
 @RequiredArgsConstructor
 public class ItemController {
     private final ItemService itemService;
-    @GetMapping
-    public  List<Item> getAllItem() {
-        return itemService.getAllItem();
+
+    @GetMapping("pageAndSort/{pageNumber}/{pageSize}/{sortProperties}/{sortDirection}")
+    public Page<ItemDto> getAllItem(
+            @PathVariable int pageNumber,
+            @PathVariable int pageSize,
+            @PathVariable String sortProperties,
+            @PathVariable Sort.Direction sortDirection
+    ) {
+        return itemService.getPaginationAndSortedItemsDTO(pageNumber, pageSize, sortProperties, sortDirection);
     }
 
-    @GetMapping("{itemId}")
-    public ItemDto getItemDtoById(@PathVariable Long itemId) {
-        return itemService.getItemDetails(itemId);
+    @GetMapping("{itemPID}")
+    public ItemDto getItemDtoById(@PathVariable UUID itemPID) {
+        return itemService.getItemDTOByPID(itemPID);
     }
 }

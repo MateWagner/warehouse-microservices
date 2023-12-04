@@ -1,46 +1,53 @@
 package com.codecool.catalog.service;
 
 import com.codecool.catalog.dto.ItemDto;
-import com.codecool.catalog.modell.Item;
+import com.codecool.catalog.modell.CatalogItem;
 import com.codecool.catalog.repository.ItemRepository;
 import com.codecool.catalog.utils.ItemMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class ItemService {
     private final ItemRepository itemRepository;
-    private final WebClient webClient;
 
-    public List<Item> getAllItem() {
-        return itemRepository.findAll();
+    protected Page<CatalogItem> getItemsPaginationAndSorting(boolean isActive, int pageNumber, int pageSize, String sortProperties, Sort.Direction sortDirection) {
+        return itemRepository.getAllByIsActive(
+                isActive,
+                PageRequest.of(pageNumber, pageSize)
+                        .withSort(Sort.by(sortDirection, sortProperties))
+        );
     }
 
-    public ItemDto getItemDetails(Long itemId) {
-        Item item = getItemById(itemId);
-        Boolean isAvailable =
-                webClient.get()
-                .uri("http://app/warehouse/api/v1/product/available/"+itemId)
-                .retrieve()
-                .bodyToMono(Boolean.class)
-                .block();
-
-        return ItemMapper.itemToItemDto(item, Boolean.TRUE.equals(isAvailable));
+    public Page<ItemDto> getPaginationAndSortedItemsDTO(int pageNumber, int pageSize, String sortProperties, Sort.Direction sortDirection) {
+        return getItemsPaginationAndSorting(
+                true,
+                pageNumber,
+                pageSize,
+                sortProperties,
+                sortDirection
+        )
+                .map(ItemMapper::itemToItemDto);
     }
 
-    private Item getItemById(Long itemId) {
-        return itemRepository.findById(itemId)
+    public ItemDto getItemDTOByPID(UUID itemByPID) {
+        CatalogItem catalogItem = getItemByPID(itemByPID, true);
+        return ItemMapper.itemToItemDto(catalogItem);
+    }
+
+    private CatalogItem getItemByPID(UUID itemPID, boolean isActive) {
+        return itemRepository.getCatalogItemByPublicIdAndIsActive(itemPID, isActive)
                 .orElseThrow(() -> new HttpClientErrorException(
                                 HttpStatus.NOT_FOUND,
-                                "Can't find Item with Id: " + itemId
+                                "Can't find Item with Id: " + itemPID
                         )
                 );
     }

@@ -1,16 +1,16 @@
 package com.codecool.catalog.utils;
 
 import com.codecool.catalog.dto.ItemDto;
-import com.codecool.catalog.modell.Item;
+import com.codecool.catalog.modell.CatalogItem;
 
 public class ItemMapper {
 
-    public static ItemDto itemToItemDto(Item item, boolean isAvailable) {
+    public static ItemDto itemToItemDto(CatalogItem catalogItem) {
         return new ItemDto(
-                item.getId(),
-                item.getName(),
-                item.getDescription(),
-                isAvailable
+                catalogItem.getPublicId(),
+                catalogItem.getName(),
+                catalogItem.getDescription(),
+                CategoryMapper.categoryToDTO(catalogItem.getCategory())
         );
     }
 }

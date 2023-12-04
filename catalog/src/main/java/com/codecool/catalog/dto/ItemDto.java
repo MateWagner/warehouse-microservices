@@ -1,4 +1,6 @@
 package com.codecool.catalog.dto;
 
-public record ItemDto(Long id, String name, String description, boolean isAvailable) {
+import java.util.UUID;
+
+public record ItemDto(UUID id, String name, String description, CategoryDTO category) {
 }
