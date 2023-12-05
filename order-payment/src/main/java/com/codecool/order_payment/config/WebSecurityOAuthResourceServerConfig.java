@@ -1,6 +1,6 @@
 package com.codecool.order_payment.config;
 
-import com.codecool.catalog_inventory.utils.KeycloakJwtRolesConverter;
+import com.codecool.order_payment.utils.KeycloakJwtRolesConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
