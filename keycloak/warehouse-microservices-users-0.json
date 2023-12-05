@@ -3,10 +3,11 @@
   "users" : [ {
     "id" : "3fae8b1d-cd0b-4dae-8d7e-e3d234941058",
     "createdTimestamp" : 1698919722187,
-    "username" : "admin",
+    "username" : "admin@admin.com",
     "enabled" : true,
     "totp" : false,
-    "emailVerified" : false,
+    "emailVerified" : true,
+    "email" : "admin@admin.com",
     "credentials" : [ {
       "id" : "bebfc8d2-ff57-4cae-8263-c4606879569a",
       "type" : "password",
@@ -17,50 +18,68 @@
     } ],
     "disableableCredentialTypes" : [ ],
     "requiredActions" : [ ],
-    "realmRoles" : [ "ADMIN", "default-roles-warehouse-microservices" ],
+    "realmRoles" : [ "admin", "default-roles-warehouse-microservices", "user" ],
     "notBefore" : 0,
     "groups" : [ ]
   }, {
     "id" : "4f0071a5-6980-4da5-bc71-4157abb359e9",
     "createdTimestamp" : 1699003539833,
-    "username" : "service-account-catalog-service",
+    "username" : "service-account-catalog-inventory-service",
     "enabled" : true,
     "totp" : false,
     "emailVerified" : false,
-    "serviceAccountClientId" : "catalog-service",
+    "serviceAccountClientId" : "catalog-inventory-service",
     "credentials" : [ ],
     "disableableCredentialTypes" : [ ],
     "requiredActions" : [ ],
     "realmRoles" : [ "default-roles-warehouse-microservices" ],
     "clientRoles" : {
-      "catalog-service" : [ "uma_protection" ]
+      "catalog-inventory-service" : [ "uma_protection" ]
     },
     "notBefore" : 0,
     "groups" : [ ]
   }, {
-    "id" : "f8b38b96-a0cf-4eb1-97f7-bec724cb036f",
-    "createdTimestamp" : 1698922454597,
-    "username" : "service-account-warehouse-service",
+    "id" : "74b606e9-6955-45c3-97b9-e2427095ce74",
+    "createdTimestamp" : 1701771802173,
+    "username" : "service-account-messaging-service",
     "enabled" : true,
     "totp" : false,
     "emailVerified" : false,
-    "serviceAccountClientId" : "warehouse-service",
+    "serviceAccountClientId" : "messaging-service",
     "credentials" : [ ],
     "disableableCredentialTypes" : [ ],
     "requiredActions" : [ ],
     "realmRoles" : [ "default-roles-warehouse-microservices" ],
     "clientRoles" : {
-      "warehouse-service" : [ "uma_protection" ]
+      "messaging-service" : [ "uma_protection" ]
+    },
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
+    "id" : "7d907f1f-80fa-4136-856b-68e46f1d9dfc",
+    "createdTimestamp" : 1701770834709,
+    "username" : "service-account-order-payment",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : false,
+    "serviceAccountClientId" : "order-payment",
+    "credentials" : [ ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-warehouse-microservices" ],
+    "clientRoles" : {
+      "order-payment" : [ "uma_protection" ]
     },
     "notBefore" : 0,
     "groups" : [ ]
   }, {
     "id" : "fc7d4e82-931e-4e69-9ce7-8724653489f1",
     "createdTimestamp" : 1698919864217,
-    "username" : "user",
+    "username" : "user@user.com",
     "enabled" : true,
     "totp" : false,
-    "emailVerified" : false,
+    "emailVerified" : true,
+    "email" : "user@user.com",
     "credentials" : [ {
       "id" : "6559cf31-153f-41d5-a314-d9046f9f4942",
       "type" : "password",
