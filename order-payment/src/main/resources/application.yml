@@ -16,8 +16,8 @@ spring:
       client:
         registration:
           keycloak:
-            client-id: catalog-service
-            client-secret: n1x1mBvcuJNeqnFh61xb4oJXjuih6uXp
+            client-id: order-payment
+            client-secret: 5pv6GlBYGdW2ahvoB689AIQyAbEv4owg
             authorization-grant-type: client_credentials
         provider:
           keycloak:
