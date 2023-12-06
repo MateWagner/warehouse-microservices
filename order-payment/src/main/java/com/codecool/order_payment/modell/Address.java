@@ -23,26 +23,26 @@ public class Address {
             allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_id_sequence")
-    Long id;
+    private Long id;
 
-    UUID publicID;
+    private UUID publicID;
 
-    UUID userPID;
-
-    @OneToOne
-    Postcode postcode;
+    private UUID userPID;
 
     @OneToOne
-    City city;
+    private Postcode postcode;
 
     @OneToOne
-    Street street;
+    private City city;
 
     @OneToOne
-    AreaName areaName;
+    private Street street;
 
     @OneToOne
-    HouseNumber houseNumber;
+    private AreaName areaName;
 
-    Boolean isPreferred;
+    @OneToOne
+    private HouseNumber houseNumber;
+
+    private Boolean isPreferred;
 }

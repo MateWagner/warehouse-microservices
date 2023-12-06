@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
+@Table(name = "orders")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -26,15 +27,22 @@ public class Order {
             allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_id_sequence")
-    Long id;
+    private Long id;
 
     @Column(
             unique = true
     )
-    UUID publicID;
-    BigDecimal total;
-    UUID userID;
-    OrderStatus orderStatus;
+    private UUID publicID;
 
-    Set<OrderItem> orderItems;
+    private BigDecimal total;
+
+    private UUID userID;
+
+    private OrderStatus orderStatus;
+
+    @OneToMany(
+            mappedBy = "order",
+            cascade = CascadeType.ALL
+    )
+    private Set<OrderItem> orderItems;
 }

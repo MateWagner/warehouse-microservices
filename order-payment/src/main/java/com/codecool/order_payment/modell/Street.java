@@ -21,7 +21,7 @@ public class Street {
             allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "street_id_sequence")
-    Long id;
+    private Long id;
 
-    String street;
+    private String street;
 }

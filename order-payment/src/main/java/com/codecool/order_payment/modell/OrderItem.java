@@ -23,8 +23,16 @@ public class OrderItem {
             allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_item_id_sequence")
-    Long id;
+    private Long id;
 
-    UUID itemPID;
-    Integer amount;
+    private UUID itemPID;
+
+    private Integer amount;
+
+    @ManyToOne
+    @JoinColumn(
+            name = "order_id",
+            nullable = false
+    )
+    private Order order;
 }

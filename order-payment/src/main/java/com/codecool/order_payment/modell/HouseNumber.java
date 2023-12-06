@@ -21,7 +21,7 @@ public class HouseNumber {
             allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "house_number_id_sequence")
-    Long id;
+    private Long id;
 
-    String houseNumber;
+    private String houseNumber;
 }

@@ -21,7 +21,7 @@ public class City {
             allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "city_id_sequence")
-    Long id;
+    private Long id;
 
-    String city;
+    private String city;
 }

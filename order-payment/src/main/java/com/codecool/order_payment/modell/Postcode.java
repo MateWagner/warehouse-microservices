@@ -21,7 +21,7 @@ public class Postcode {
             allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "postcode_id_sequence")
-    Long id;
+    private Long id;
 
-    Integer postcode;
+    private Integer postcode;
 }

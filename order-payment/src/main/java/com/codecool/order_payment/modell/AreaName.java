@@ -21,7 +21,7 @@ public class AreaName {
             allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "area_name_id_sequence")
-    Long id;
+    private Long id;
 
-    String areaName;
+    private String areaName;
 }
