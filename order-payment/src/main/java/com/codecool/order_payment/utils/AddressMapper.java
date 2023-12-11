@@ -8,7 +8,7 @@ public class AddressMapper {
     public static AddressDTO toDTO(Address address) {
         return new AddressDTO(
                 address.getPublicID(),
-                address.getPublicID(),
+                address.getUserID(),
                 address.getPostcode().getPostcode(),
                 address.getCity().getCity(),
                 address.getStreet().getStreet(),
