@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,7 +25,7 @@ public class AddressService {
     private final HouseNumberService houseNumberService;
 
     public UUID handleNewAddress(NewAddressDTO newAddressDTO) {
-        Address newAddress = getAddress(newAddressDTO);
+        Address newAddress = generateAddress(newAddressDTO);
         return addressRepository.save(newAddress).getPublicID();
     }
 
@@ -32,9 +34,18 @@ public class AddressService {
         return AddressMapper.toDTO(address);
     }
 
-    private Address getAddress(NewAddressDTO newAddressDTO) {
+    public Set<AddressDTO> getAddressesDTOByUserID(UUID userID) {
+        final Set<AddressDTO> addressesDTO = getAddressesByUserID(userID).stream().map(AddressMapper::toDTO).collect(Collectors.toSet());
+        if (addressesDTO.isEmpty()) {
+            throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "User don't have any related Address userID: " + userID);
+        }
+        return addressesDTO;
+    }
+
+    private Address generateAddress(NewAddressDTO newAddressDTO) {
         return Address.builder()
-                .userPID(newAddressDTO.userID())
+                .publicID(UUID.randomUUID())
+                .userID(newAddressDTO.userID())
                 .postcode(postcodeService.createAndOrGetPostcode(
                         newAddressDTO.postcode()
                 ))
@@ -60,5 +71,9 @@ public class AddressService {
                                 "Can't find Address: " + addressPID
                         )
                 );
+    }
+
+    private Set<Address> getAddressesByUserID(UUID userID) {
+        return addressRepository.findAllByUserID(userID);
     }
 }
