@@ -6,6 +6,7 @@ import com.codecool.order_payment.service.AddressService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
 import java.util.UUID;
 
 @RestController
@@ -23,5 +24,11 @@ public class AddressController {
     public AddressDTO getAddressByPID(@PathVariable UUID addressPID) {
         return addressService.getAddressByPID(addressPID);
 
+    }
+
+    // TODO Can we get the user id from Security context ?
+    @GetMapping("user/{userID}")
+    public Set<AddressDTO> getAddressesDTOByUserID(@PathVariable UUID userID) {
+        return addressService.getAddressesDTOByUserID(userID);
     }
 }
