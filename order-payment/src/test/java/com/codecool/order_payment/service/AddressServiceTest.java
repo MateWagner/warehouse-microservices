@@ -18,8 +18,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -109,7 +108,7 @@ class AddressServiceTest {
                 return addressDTO;
             return acc;
         });
-
+        assertTrue(resultAddressDTO.isPresent());
         assertEquals(userID, resultAddressDTO.get().userID());
 
         verify(addressRepository, times(1)).findAllByUserID(userID);
