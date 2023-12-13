@@ -7,8 +7,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.Optional;
 
@@ -40,7 +38,7 @@ class StreetServiceTest {
     void willSaveNewStreet() {
         String STREET = "name";
         Street street = Street.builder().street(STREET).build();
-        when(streetRepository.findByStreet(STREET)).thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND, ""));
+        when(streetRepository.findByStreet(STREET)).thenReturn(Optional.empty());
         when(streetRepository.save(any(Street.class))).thenReturn(street);
         Street result = streetService.createAndOrGetStreet(STREET);
 

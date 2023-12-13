@@ -8,8 +8,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.Optional;
 
@@ -41,7 +39,7 @@ class PostcodeServiceTest {
     void willSaveNewPostcode() {
         Integer POSTCODE = 3000;
         Postcode postcode = Postcode.builder().postcode(POSTCODE).build();
-        when(postcodeRepository.findByPostcode(POSTCODE)).thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND, ""));
+        when(postcodeRepository.findByPostcode(POSTCODE)).thenReturn(Optional.empty());
         when(postcodeRepository.save(any(Postcode.class))).thenReturn(postcode);
         Postcode result = postcodeService.createAndOrGetPostcode(POSTCODE);
 

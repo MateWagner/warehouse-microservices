@@ -7,8 +7,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.Optional;
 
@@ -39,7 +37,7 @@ class CityServiceTest {
     void willSaveNewCity() {
         String CITY_NAME = "NAME";
         City city = City.builder().city(CITY_NAME).build();
-        when(cityRepository.findByCity(CITY_NAME)).thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND, ""));
+        when(cityRepository.findByCity(CITY_NAME)).thenReturn(Optional.empty());
         when(cityRepository.save(any(City.class))).thenReturn(city);
         City result = cityService.createAndOrGetCity(CITY_NAME);
 

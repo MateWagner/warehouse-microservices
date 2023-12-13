@@ -7,8 +7,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.Optional;
 
@@ -39,7 +37,7 @@ class HouseNumberServiceTest {
     void willSaveNewHouseNumber() {
         String HOUSE_NUMBER = "NAME";
         HouseNumber houseNumber = HouseNumber.builder().houseNumber(HOUSE_NUMBER).build();
-        when(houseNumberRepository.findByHouseNumber(HOUSE_NUMBER)).thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND, ""));
+        when(houseNumberRepository.findByHouseNumber(HOUSE_NUMBER)).thenReturn(Optional.empty());
         when(houseNumberRepository.save(any(HouseNumber.class))).thenReturn(houseNumber);
         HouseNumber result = houseNumberService.createAndOrGetHouseNumber(HOUSE_NUMBER);
 

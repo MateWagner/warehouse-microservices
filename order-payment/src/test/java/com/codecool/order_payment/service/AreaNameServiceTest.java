@@ -7,8 +7,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.Optional;
 
@@ -39,7 +37,7 @@ class AreaNameServiceTest {
     void willSaveNewAreaName() {
         String AREA_NAME = "NAME";
         AreaName areaName = AreaName.builder().areaName(AREA_NAME).build();
-        when(areaNameRepository.findByAreaName(AREA_NAME)).thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND, ""));
+        when(areaNameRepository.findByAreaName(AREA_NAME)).thenReturn(Optional.empty());
         when(areaNameRepository.save(any(AreaName.class))).thenReturn(areaName);
         AreaName result = areaNameService.createAndOrGetAreaName(AREA_NAME);
 
