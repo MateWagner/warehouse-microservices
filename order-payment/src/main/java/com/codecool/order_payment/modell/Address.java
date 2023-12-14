@@ -25,24 +25,40 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_id_sequence")
     private Long id;
 
+    @Column(
+            nullable = false
+    )
     private UUID publicID;
 
-    private UUID userPID;
+    @Column(
+            nullable = false
+    )
+    private UUID userID;
 
-    @OneToOne
+    @ManyToOne(
+            optional = false
+    )
     private Postcode postcode;
 
-    @OneToOne
+    @ManyToOne(
+            optional = false
+    )
     private City city;
 
-    @OneToOne
+    @ManyToOne(
+            optional = false
+    )
     private Street street;
 
-    @OneToOne
+    @ManyToOne(
+            optional = false
+    )
     private AreaName areaName;
 
-    @OneToOne
+    @ManyToOne(
+            optional = false
+    )
     private HouseNumber houseNumber;
-
+    // TODO put it to its own table
     private Boolean isPreferred;
 }

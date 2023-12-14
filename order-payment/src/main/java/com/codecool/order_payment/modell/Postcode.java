@@ -23,5 +23,8 @@ public class Postcode {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "postcode_id_sequence")
     private Long id;
 
+    @Column(
+            unique = true
+    )
     private Integer postcode;
 }
