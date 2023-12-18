@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -40,9 +42,15 @@ public class Order {
 
     private OrderStatus orderStatus;
 
+    private LocalDateTime created;
+
+    private LocalDateTime updated;
+
     @OneToMany(
-            mappedBy = "order",
             cascade = CascadeType.ALL
     )
-    private Set<OrderItem> orderItems;
+    @JoinColumn(
+            name = "order_id"
+    )
+    private Set<OrderItem> orderItems = new HashSet<>();
 }

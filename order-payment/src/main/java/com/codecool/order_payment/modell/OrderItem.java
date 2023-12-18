@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import net.minidev.json.annotate.JsonIgnore;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
@@ -28,11 +29,9 @@ public class OrderItem {
     private UUID itemPID;
 
     private Integer amount;
+    private BigDecimal price;
 
-    @ManyToOne
-    @JoinColumn(
-            name = "order_id",
-            nullable = false
-    )
-    private Order order;
+    public BigDecimal getTotalPrice() {
+        return price.multiply(BigDecimal.valueOf(amount));
+    }
 }
