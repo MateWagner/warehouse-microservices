@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -35,17 +37,24 @@ public class CatalogItem {
     )
     String name;
 
+    @Column(
+            nullable = false
+    )
+    BigDecimal price;
+
     String description;
     String imgUrl;
+
     @JsonIgnore
     Boolean isActive;
 
     @ManyToOne
     Category category;
 
-    public CatalogItem(UUID publicId, String name, String description, String imgUrl, Boolean isActive, Category category) {
+    public CatalogItem(UUID publicId, String name, BigDecimal price, String description, String imgUrl, Boolean isActive, Category category) {
         this.publicId = publicId;
         this.name = name;
+        this.price = price;
         this.description = description;
         this.imgUrl = imgUrl;
         this.isActive = isActive;

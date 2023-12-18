@@ -1,6 +1,8 @@
 package com.codecool.catalog_inventory.controller;
 
 import com.codecool.catalog_inventory.dto.ItemDto;
+import com.codecool.catalog_inventory.dto.PriceRequest;
+import com.codecool.catalog_inventory.dto.PriceResponse;
 import com.codecool.catalog_inventory.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -28,5 +30,10 @@ public class ItemController {
     @GetMapping("{itemPID}")
     public ItemDto getItemDtoById(@PathVariable UUID itemPID) {
         return itemService.getItemDTOByPID(itemPID);
+    }
+
+    @PostMapping("prices")
+    public PriceResponse getPrecises(@RequestBody PriceRequest priceRequest) {
+        return itemService.getPierces(priceRequest);
     }
 }

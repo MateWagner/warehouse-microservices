@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Component
@@ -45,14 +46,15 @@ public class DatabaseInit implements CommandLineRunner {
         );
         Category ballGameCategory = categoryRepository.save(ballGame);
 
-        CatalogItem catalogItem1 = new CatalogItem(
-                ITEM_1_UUID,
-                "Basket Ball",
-                "U Can Play With",
-                "imgurl",
-                Boolean.TRUE,
-                ballGameCategory
-        );
+        CatalogItem catalogItem1 = CatalogItem.builder()
+                .publicId(ITEM_1_UUID)
+                .name("Basket Ball")
+                .description("U Can Play With")
+                .price(BigDecimal.valueOf(10.1))
+                .imgUrl("imgURL")
+                .isActive(Boolean.TRUE)
+                .category(ballGameCategory)
+                .build();
 
         InventoryProduct product1 = new InventoryProduct(
                 ITEM_1_UUID,
