@@ -19,7 +19,6 @@ public class WarehouseApiClient {
     private String URL_PREFIX;
 
     public PriceResponse getPrices(PriceRequest priceRequest) {
-
         try {
             return webClient.post()
                     .uri(URL_PREFIX + "/api/v1/item/prices")

@@ -1,7 +1,7 @@
 package com.codecool.catalog_inventory.service;
 
-import com.codecool.catalog_inventory.api.ApiClient;
-import com.codecool.catalog_inventory.api.dto.ApiReservedProduct;
+import com.codecool.catalog_inventory.api.CheckoutApiClient;
+import com.codecool.catalog_inventory.api.dto.CachedProduct;
 import com.codecool.catalog_inventory.dto.StockInformationDto;
 import com.codecool.catalog_inventory.modell.InventoryProduct;
 import com.codecool.catalog_inventory.repository.ProductRepository;
@@ -16,7 +16,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepository productRepository;
-    private final ApiClient apiClient;
+    private final CheckoutApiClient checkoutApiClient;
 
     protected InventoryProduct getProductByItemPID(UUID itemPID) {
         return productRepository.findByItemPID(itemPID).orElseThrow(
@@ -26,7 +26,7 @@ public class ProductService {
 
     public StockInformationDto getAvailableProductByItemPID(UUID itemPID) {
             InventoryProduct product = getProductByItemPID(itemPID);
-            ApiReservedProduct reservedProduct = apiClient.getReservedAmountFromOrderService(itemPID);
+            CachedProduct reservedProduct = checkoutApiClient.getReservedAmountFromOrderService(itemPID);
             long totalAmount = product.getQuantity() - reservedProduct.amount();
             return getStockInformationDto(itemPID, totalAmount);
     }

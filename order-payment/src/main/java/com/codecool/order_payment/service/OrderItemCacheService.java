@@ -1,7 +1,9 @@
 package com.codecool.order_payment.service;
 
+import com.codecool.order_payment.dto.CachedProduct;
 import com.codecool.order_payment.modell.redis.OrderItemCache;
 import com.codecool.order_payment.repository.redis.OrderItemCacheRepository;
+import com.codecool.order_payment.utils.OrderItemCacheMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,10 @@ public class OrderItemCacheService {
                 itemCacheRepository.save(cacheItem);
             }
         });
+    }
+
+    public CachedProduct getReservedOrderItems(UUID itemPID) {
+        return OrderItemCacheMapper.toCachedProduct(getById(itemPID));
     }
 
     protected OrderItemCache getById(UUID itemPID) {
