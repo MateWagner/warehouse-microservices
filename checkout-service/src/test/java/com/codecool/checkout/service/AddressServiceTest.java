@@ -1,4 +1,4 @@
-package com.codecool.order_payment.service;
+package com.codecool.checkout.service;
 
 import com.codecool.checkout.dto.AddressDTO;
 import com.codecool.checkout.dto.NewAddressDTO;

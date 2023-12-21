@@ -1,76 +1,112 @@
 version: '3.8'
 services:
-#  keycloak:
-#    image: keycloak/keycloak:22.0
-#    volumes:
-#      - ./keycloak:/opt/keycloak/data/import
-#    environment:
-#      KEYCLOAK_ADMIN: admin
-#      KEYCLOAK_ADMIN_PASSWORD: admin
-#    command:
-#      - start-dev
-#      - --proxy=edge
-#      - --hostname-strict-https=false
-#      - --import-realm
-#      - --http-relative-path=/auth
-#      - --hostname-debug=true
-#
-#  catalog-inventory-service:
-#    build:
-#      context: ./catalog
-#      dockerfile: Dockerfile
-#    restart: unless-stopped
-#    depends_on:
-#      - database
-#      - keycloak
-#    environment:
-#      SERVER_PORT: 8080
-#      # LOGGING_LEVEL_ROOT: DEBUG
-#      SERVER_USE-FORWARD-HEADERS: true
-#      SPRING_DATASOURCE_USERNAME: dbuser
-#      SPRING_DATASOURCE_PASSWORD: dbpassword
-#      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/warehouse
-#      SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: true
-#      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_CLIENT_ID: catalog-service
-#      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_CLIENT_SECRET: n1x1mBvcuJNeqnFh61xb4oJXjuih6uXp
-#      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_AUTHORIZATION_GRANT_TYPE: client_credentials
-#      SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_TOKEN_URI: http://app/auth/realms/warehouse-microservices/protocol/openid-connect/token
-#      SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_ISSUER_URI: http://app/auth/realms/warehouse-microservices
-#      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI: http://app/auth/realms/warehouse-microservices
-#      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI: http://app/auth/realms/warehouse-microservices/protocol/openid-connect/certs
-#      LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY: TRACE
-#    networks:
-#      - default
-#
-#  app:
-#    image: nginx
-#    ports:
-#      - 80:80
-#    volumes:
-#      - ./nginx/api-gateway.conf:/etc/nginx/conf.d/default.conf
-#    depends_on:
-#      - warehouse-services
-#      - catalog-services
-#      - keycloak
-#
-#  database:
-#    image: postgres:alpine3.17
-#    restart: unless-stopped
-#    environment:
-#      POSTGRES_USER: dbuser
-#      POSTGRES_PASSWORD: dbpassword
-#      POSTGRES_DB: warehouse
-#    networks:
-#      - default
+  app:
+    image: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/api-gateway.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - warehouse-service
+      - checkout-service
+      - keycloak
+      - redis
+
+  database:
+    image: postgres:alpine3.17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: dbpassword
+      POSTGRES_DB: warehouse
+    networks:
+      - default
+
+  keycloak:
+    image: keycloak/keycloak:22.0
+    volumes:
+      - ./keycloak:/opt/keycloak/data/import
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    command:
+      - start-dev
+      - --proxy=edge
+      - --hostname-strict-https=false
+      - --import-realm
+      - --http-relative-path=/auth
+      - --hostname-debug=true
 
   redis:
     image: redis:latest
     command: redis-server
-#    volumes:
-#      - redis:/var/lib/redis
-#      - redis-config:/usr/local/etc/redis/redis.conf
-    ports:
-      - 6379:6379
+    volumes:
+      - ./redis/data:/var/lib/redis
+  #      - redis-config:/usr/local/etc/redis/redis.conf
+  #    ports:
+  #      - 6379:6379
 
-#networks:
-#  default:
+  warehouse-service:
+    build:
+      context: ./warehouse-service
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - database
+      - keycloak
+    environment:
+      SERVER_PORT: 8080
+      # LOGGING_LEVEL_ROOT: DEBUG
+      CHECKOUT_API_URL-PREFIX: http://app/checkout
+      SERVER_USE-FORWARD-HEADERS: true
+      SPRING_DATASOURCE_USERNAME: dbuser
+      SPRING_DATASOURCE_PASSWORD: dbpassword
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/warehouse
+      SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: true
+      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_CLIENT_ID: warehouse-service
+      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_CLIENT_SECRET: n1x1mBvcuJNeqnFh61xb4oJXjuih6uXp
+      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_AUTHORIZATION_GRANT_TYPE: client_credentials
+      SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_TOKEN_URI: http://app/auth/realms/warehouse-microservices/protocol/openid-connect/token
+      SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_ISSUER_URI: http://app/auth/realms/warehouse-microservices
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI: http://app/auth/realms/warehouse-microservices
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI: http://app/auth/realms/warehouse-microservices/protocol/openid-connect/certs
+      LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY: TRACE
+    networks:
+      - default
+
+  checkout-service:
+    build:
+      context: ./checkout-service
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - database
+      - keycloak
+      - redis
+    environment:
+      SPRING_PROFILES_ACTIVE: DEV
+      SPRING_DATA_REDIS_DATABASE: 0
+      SPRING_DATA_REDIS_HOST: redis
+#      SPRING_DATA_REDIS_PORT: 80
+      SPRING_DATA_REDIS_PORT: 6379
+      SERVER_PORT: 8080
+      # LOGGING_LEVEL_ROOT: DEBUG
+      WAREHOUSE_API_URL-PREFIX: http://app/warehouse
+      SERVER_USE-FORWARD-HEADERS: true
+      SPRING_DATASOURCE_USERNAME: dbuser
+      SPRING_DATASOURCE_PASSWORD: dbpassword
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/warehouse
+      SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: true
+      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_CLIENT_ID: checkout-service
+      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_CLIENT_SECRET: 5pv6GlBYGdW2ahvoB689AIQyAbEv4owg
+      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_AUTHORIZATION_GRANT_TYPE: client_credentials
+      SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_TOKEN_URI: http://app/auth/realms/warehouse-microservices/protocol/openid-connect/token
+      SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_ISSUER_URI: http://app/auth/realms/warehouse-microservices
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI: http://app/auth/realms/warehouse-microservices
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI: http://app/auth/realms/warehouse-microservices/protocol/openid-connect/certs
+      LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY: TRACE
+    networks:
+      - default
+
+networks:
+  default:

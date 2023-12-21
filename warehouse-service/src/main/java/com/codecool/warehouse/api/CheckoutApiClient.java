@@ -16,7 +16,7 @@ import java.util.UUID;
 public class CheckoutApiClient {
     private final WebClient webClient;
 
-    @Value("${checkout.api.url_prefix}")
+    @Value("${checkout.api.url-prefix}")
     private String URL_PREFIX;
 
     public CachedProduct getReservedAmountFromOrderService(UUID itemPID) {

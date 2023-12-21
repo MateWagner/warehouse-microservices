@@ -1,5 +1,6 @@
 package com.codecool.warehouse.config;
 
+import com.codecool.warehouse.utils.KeycloakJwtRolesConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +21,7 @@ class WebSecurityOAuthResourceServerConfig {
 
         http
                 .authorizeHttpRequests(access -> access
-//                        .requestMatchers("/api/v1/item").hasAuthority(KeycloakJwtRolesConverter.PREFIX_REALM_ROLE + "ADMIN")
+                        .requestMatchers("/api/v1/item/prices").hasAuthority("SCOPE_system")
                                 .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(rs -> rs

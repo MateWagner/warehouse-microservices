@@ -1,4 +1,4 @@
-package com.codecool.order_payment.service;
+package com.codecool.checkout.service;
 
 import com.codecool.checkout.modell.jpa.Street;
 import com.codecool.checkout.repository.jpa.StreetRepository;

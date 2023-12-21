@@ -1,6 +1,6 @@
 checkout:
   api:
-    url_prefix: http://localhost:8081
+    url-prefix: http://localhost:8081
 logging:
   level:
     org:

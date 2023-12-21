@@ -33,14 +33,15 @@ public class ItemService {
     }
 
     public Page<ItemDto> getPaginationAndSortedItemsDTO(int pageNumber, int pageSize, String sortProperties, Sort.Direction sortDirection) {
-        return getItemsPaginationAndSorting(
+        final Page<CatalogItem> result = getItemsPaginationAndSorting(
                 true,
                 pageNumber,
                 pageSize,
                 sortProperties,
                 sortDirection
-        )
-                .map(ItemMapper::itemToItemDto);
+        );
+        System.out.println(result);
+        return result.map(ItemMapper::itemToItemDto);
     }
 
     public ItemDto getItemDTOByPID(UUID itemByPID) {
@@ -53,7 +54,7 @@ public class ItemService {
     }
 
     private Map<UUID, BigDecimal> getIdPriceMap(PriceRequest priceRequest) {
-        return priceRequest.itemPID().stream()
+        return priceRequest.itemPIDS().stream()
                 .collect(
                         Collectors.toMap(
                                 uuid -> uuid,

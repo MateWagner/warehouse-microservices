@@ -1,6 +1,6 @@
 warehouse:
   api:
-    url_prefix: http://localhost:8080
+    url-prefix: http://localhost:8080
 
 server:
   port: 8081
