@@ -15,9 +15,9 @@ import java.util.UUID;
 public class OrderItemCache implements Serializable {
     @Id
     private UUID itemPID;
-    private Integer amount;
+    private Long amount;
 
-    public void addToAmount(int amount) {
+    public void addToAmount(Long amount) {
         this.amount += amount;
     }
 }

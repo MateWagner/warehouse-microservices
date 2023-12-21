@@ -28,7 +28,7 @@ public class OrderItem {
 
     private UUID itemPID;
 
-    private Integer amount;
+    private Long amount;
     private BigDecimal price;
 
     public BigDecimal getTotalPrice() {

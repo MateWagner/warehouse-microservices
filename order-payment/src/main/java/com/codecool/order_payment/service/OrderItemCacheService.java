@@ -15,7 +15,7 @@ import java.util.UUID;
 public class OrderItemCacheService {
     private final OrderItemCacheRepository itemCacheRepository;
 
-    public void addItemsToCache(Map<UUID, Integer> items) {
+    public void addItemsToCache(Map<UUID, Long> items) {
         items.keySet().forEach(itemPID -> {
             try {
                 OrderItemCache cacheItem = getById(itemPID);

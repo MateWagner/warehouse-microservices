@@ -79,7 +79,7 @@ public class OrderService {
         return orderItems.stream().map(OrderItem::getTotalPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    private Set<OrderItem> getOrderItems(Map<UUID, BigDecimal> prices, Map<UUID, Integer> items) {
+    private Set<OrderItem> getOrderItems(Map<UUID, BigDecimal> prices, Map<UUID, Long> items) {
         return items.keySet().stream()
                 .map(
                         itemPID -> createOrderItem(
@@ -91,7 +91,7 @@ public class OrderService {
                 .collect(Collectors.toSet());
     }
 
-    private OrderItem createOrderItem(UUID itemPID, Integer amount, BigDecimal itemPrice) {
+    private OrderItem createOrderItem(UUID itemPID, Long amount, BigDecimal itemPrice) {
         return OrderItem.builder()
                 .itemPID(itemPID)
                 .amount(amount)
