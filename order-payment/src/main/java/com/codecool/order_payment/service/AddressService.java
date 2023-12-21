@@ -2,8 +2,8 @@ package com.codecool.order_payment.service;
 
 import com.codecool.order_payment.dto.AddressDTO;
 import com.codecool.order_payment.dto.NewAddressDTO;
-import com.codecool.order_payment.modell.Address;
-import com.codecool.order_payment.repository.AddressRepository;
+import com.codecool.order_payment.modell.jpa.Address;
+import com.codecool.order_payment.repository.jpa.AddressRepository;
 import com.codecool.order_payment.utils.AddressMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

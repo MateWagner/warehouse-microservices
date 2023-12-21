@@ -1,8 +1,8 @@
 package com.codecool.order_payment.service;
 
 
-import com.codecool.order_payment.modell.Postcode;
-import com.codecool.order_payment.repository.PostcodeRepository;
+import com.codecool.order_payment.modell.jpa.Postcode;
+import com.codecool.order_payment.repository.jpa.PostcodeRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

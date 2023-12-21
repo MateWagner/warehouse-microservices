@@ -6,10 +6,11 @@ import com.codecool.order_payment.api.dto.PriceResponse;
 import com.codecool.order_payment.data.OrderStatus;
 import com.codecool.order_payment.dto.NewOrderDTO;
 import com.codecool.order_payment.dto.OrderDTO;
-import com.codecool.order_payment.modell.Order;
-import com.codecool.order_payment.modell.OrderItem;
-import com.codecool.order_payment.repository.OrderRepository;
+import com.codecool.order_payment.modell.jpa.Order;
+import com.codecool.order_payment.modell.jpa.OrderItem;
+import com.codecool.order_payment.repository.jpa.OrderRepository;
 import com.codecool.order_payment.utils.OrderMapper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -28,16 +29,20 @@ import java.util.stream.Collectors;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final WarehouseApiClient warehouseApi;
+    private final OrderItemCacheService orderItemCacheService;
 
+    @Transactional
     public UUID placeOrder(NewOrderDTO newOrderDTO) {
         PriceRequest priceRequest = createPriceRequest(newOrderDTO);
 
         PriceResponse prices = warehouseApi.getPrices(priceRequest);
 
-
         Set<OrderItem> orderItems = getOrderItems(prices.prices(), newOrderDTO.items());
 
         Order order = buildOrder(newOrderDTO, orderItems);
+
+        orderItemCacheService.addItemsToCache(newOrderDTO.items());
+
         return orderRepository.save(order).getPublicID();
     }
 

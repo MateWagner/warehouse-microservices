@@ -1,7 +1,7 @@
 package com.codecool.order_payment.service;
 
-import com.codecool.order_payment.modell.Street;
-import com.codecool.order_payment.repository.StreetRepository;
+import com.codecool.order_payment.modell.jpa.Street;
+import com.codecool.order_payment.repository.jpa.StreetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

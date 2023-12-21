@@ -1,7 +1,7 @@
 package com.codecool.order_payment.service;
 
-import com.codecool.order_payment.modell.City;
-import com.codecool.order_payment.repository.CityRepository;
+import com.codecool.order_payment.modell.jpa.City;
+import com.codecool.order_payment.repository.jpa.CityRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

@@ -1,4 +1,4 @@
-package com.codecool.order_payment.modell;
+package com.codecool.order_payment.modell.jpa;
 
 import jakarta.persistence.*;
 import lombok.*;

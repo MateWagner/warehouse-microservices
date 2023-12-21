@@ -2,8 +2,8 @@ package com.codecool.order_payment.service;
 
 import com.codecool.order_payment.dto.AddressDTO;
 import com.codecool.order_payment.dto.NewAddressDTO;
-import com.codecool.order_payment.modell.*;
-import com.codecool.order_payment.repository.AddressRepository;
+import com.codecool.order_payment.modell.jpa.*;
+import com.codecool.order_payment.repository.jpa.AddressRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

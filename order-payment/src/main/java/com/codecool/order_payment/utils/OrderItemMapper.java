@@ -1,7 +1,7 @@
 package com.codecool.order_payment.utils;
 
 import com.codecool.order_payment.dto.OrderItemDTO;
-import com.codecool.order_payment.modell.OrderItem;
+import com.codecool.order_payment.modell.jpa.OrderItem;
 
 public class OrderItemMapper {
 

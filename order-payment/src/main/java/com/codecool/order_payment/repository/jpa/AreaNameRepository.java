@@ -1,6 +1,6 @@
-package com.codecool.order_payment.repository;
+package com.codecool.order_payment.repository.jpa;
 
-import com.codecool.order_payment.modell.AreaName;
+import com.codecool.order_payment.modell.jpa.AreaName;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

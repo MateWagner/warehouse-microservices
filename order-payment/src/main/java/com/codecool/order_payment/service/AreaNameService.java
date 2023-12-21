@@ -1,7 +1,7 @@
 package com.codecool.order_payment.service;
 
-import com.codecool.order_payment.modell.AreaName;
-import com.codecool.order_payment.repository.AreaNameRepository;
+import com.codecool.order_payment.modell.jpa.AreaName;
+import com.codecool.order_payment.repository.jpa.AreaNameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

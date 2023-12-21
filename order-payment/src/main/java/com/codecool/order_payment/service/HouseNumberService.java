@@ -1,7 +1,7 @@
 package com.codecool.order_payment.service;
 
-import com.codecool.order_payment.modell.HouseNumber;
-import com.codecool.order_payment.repository.HouseNumberRepository;
+import com.codecool.order_payment.modell.jpa.HouseNumber;
+import com.codecool.order_payment.repository.jpa.HouseNumberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,9 +1,19 @@
+warehouse:
+  api:
+    url: http://localhost:8080
+server:
+  port: 8081
 logging:
   level:
     org:
       springframework:
         security: DEBUG
 spring:
+  data:
+    redis:
+      database: 0
+      host: localhost
+      port: 6379
   jpa:
     properties:
       hibernate:

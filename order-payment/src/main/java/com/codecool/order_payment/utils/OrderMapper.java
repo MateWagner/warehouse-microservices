@@ -2,7 +2,7 @@ package com.codecool.order_payment.utils;
 
 import com.codecool.order_payment.dto.OrderDTO;
 import com.codecool.order_payment.dto.OrderItemDTO;
-import com.codecool.order_payment.modell.Order;
+import com.codecool.order_payment.modell.jpa.Order;
 
 import java.util.Set;
 import java.util.stream.Collectors;

@@ -1,4 +1,4 @@
-package com.codecool.order_payment.modell;
+package com.codecool.order_payment.modell.jpa;
 
 import com.codecool.order_payment.data.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;

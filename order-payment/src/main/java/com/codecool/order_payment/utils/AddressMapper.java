@@ -1,7 +1,7 @@
 package com.codecool.order_payment.utils;
 
 import com.codecool.order_payment.dto.AddressDTO;
-import com.codecool.order_payment.modell.Address;
+import com.codecool.order_payment.modell.jpa.Address;
 
 public class AddressMapper {
 

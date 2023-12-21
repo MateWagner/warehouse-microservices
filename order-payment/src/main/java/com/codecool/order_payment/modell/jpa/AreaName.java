@@ -1,4 +1,4 @@
-package com.codecool.order_payment.modell;
+package com.codecool.order_payment.modell.jpa;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,17 +11,17 @@ import net.minidev.json.annotate.JsonIgnore;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class Street {
+public class AreaName {
 
     @Id
     @JsonIgnore
     @SequenceGenerator(
-            name = "street_id_sequence",
-            sequenceName = "street_id_sequence",
+            name = "area_name_id_sequence",
+            sequenceName = "area_name_id_sequence",
             allocationSize = 1
     )
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "street_id_sequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "area_name_id_sequence")
     private Long id;
 
-    private String street;
+    private String areaName;
 }
