@@ -1,8 +1,10 @@
 warehouse:
   api:
-    url: http://localhost:8080
+    url_prefix: http://localhost:8080
+
 server:
   port: 8081
+
 logging:
   level:
     org:

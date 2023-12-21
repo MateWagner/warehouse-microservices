@@ -15,7 +15,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class WarehouseApiClient {
     private final WebClient webClient;
 
-    @Value("${warehouse.api.url}")
+    @Value("${warehouse.api.url_prefix}")
     private String URL_PREFIX;
 
     public PriceResponse getPrices(PriceRequest priceRequest) {
