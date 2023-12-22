@@ -4,6 +4,7 @@ import com.codecool.checkout.dto.AddressDTO;
 import com.codecool.checkout.service.AddressService;
 import com.codecool.checkout.dto.NewAddressDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -16,6 +17,7 @@ public class AddressController {
     private final AddressService addressService;
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public UUID saveAddress(@RequestBody NewAddressDTO newAddressDTO) {
         return addressService.handleNewAddress(newAddressDTO);
     }
@@ -26,7 +28,6 @@ public class AddressController {
 
     }
 
-    // TODO Can we get the user id from Security context ?
     @GetMapping("user/{userID}")
     public Set<AddressDTO> getAddressesDTOByUserID(@PathVariable UUID userID) {
         return addressService.getAddressesDTOByUserID(userID);

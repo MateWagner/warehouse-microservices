@@ -35,6 +35,8 @@ public class OrderService {
     public UUID placeOrder(NewOrderDTO newOrderDTO) {
         PriceRequest priceRequest = createPriceRequest(newOrderDTO);
 
+        System.out.println(priceRequest);
+
         PriceResponse prices = warehouseApi.getPrices(priceRequest);
 
         Set<OrderItem> orderItems = getOrderItems(prices.prices(), newOrderDTO.items());

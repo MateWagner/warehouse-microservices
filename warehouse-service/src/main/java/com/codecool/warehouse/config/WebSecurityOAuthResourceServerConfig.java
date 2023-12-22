@@ -22,7 +22,7 @@ class WebSecurityOAuthResourceServerConfig {
         http
                 .authorizeHttpRequests(access -> access
                         .requestMatchers("/api/v1/item/prices").hasAuthority("SCOPE_system")
-                                .anyRequest().permitAll()
+                        .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(rs -> rs
                         .jwt(jwtConfigurer -> jwtConfigurer

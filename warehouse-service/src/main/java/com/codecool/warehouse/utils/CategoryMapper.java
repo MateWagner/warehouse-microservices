@@ -14,11 +14,4 @@ public class CategoryMapper {
                 category.getName()
         );
     }
-
-    public static Set<CategoryDTO> getCategoriesDTOSet(Collection<Category> categorySet) {
-        return categorySet.stream()
-                .map(CategoryMapper::categoryToDTO)
-                .collect(Collectors.toSet());
-    }
-
 }
