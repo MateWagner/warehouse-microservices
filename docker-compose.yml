@@ -42,9 +42,6 @@ services:
     command: redis-server
     volumes:
       - ./redis/data:/var/lib/redis
-  #      - redis-config:/usr/local/etc/redis/redis.conf
-  #    ports:
-  #      - 6379:6379
 
   warehouse-service:
     build:
@@ -87,7 +84,6 @@ services:
       SPRING_PROFILES_ACTIVE: DEV
       SPRING_DATA_REDIS_DATABASE: 0
       SPRING_DATA_REDIS_HOST: redis
-#      SPRING_DATA_REDIS_PORT: 80
       SPRING_DATA_REDIS_PORT: 6379
       SERVER_PORT: 8080
       # LOGGING_LEVEL_ROOT: DEBUG
