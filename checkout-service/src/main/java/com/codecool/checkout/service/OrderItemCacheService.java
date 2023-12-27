@@ -21,9 +21,9 @@ public class OrderItemCacheService {
         items.keySet().forEach(itemPID -> {
             try {
                 OrderItemCache cacheItem = getById(itemPID);
-                cacheItem.addToAmount(items.get(itemPID));
+                cacheItem.addAmount(items.get(itemPID));
                 itemCacheRepository.save(cacheItem);
-            } catch (Exception e) {
+            } catch (HttpClientErrorException e) {
                 OrderItemCache cacheItem = new OrderItemCache(itemPID, items.get(itemPID));
                 itemCacheRepository.save(cacheItem);
             }
