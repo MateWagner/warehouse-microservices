@@ -29,9 +29,9 @@ public class OrderItem {
     private UUID itemPID;
 
     private Long amount;
-    private BigDecimal price;
+    private BigDecimal unitPrice;
 
     public BigDecimal getTotalPrice() {
-        return price.multiply(BigDecimal.valueOf(amount));
+        return unitPrice.multiply(BigDecimal.valueOf(amount));
     }
 }

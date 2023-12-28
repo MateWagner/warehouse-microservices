@@ -9,7 +9,7 @@ public class OrderItemMapper {
         return new OrderItemDTO(
                 orderItem.getItemPID(),
                 orderItem.getAmount(),
-                orderItem.getPrice()
+                orderItem.getUnitPrice()
         );
     }
 }

@@ -6,10 +6,10 @@ import com.codecool.checkout.api.dto.PriceResponse;
 import com.codecool.checkout.data.OrderStatus;
 import com.codecool.checkout.dto.NewOrderDTO;
 import com.codecool.checkout.dto.OrderDTO;
-import com.codecool.checkout.repository.jpa.OrderRepository;
-import com.codecool.checkout.utils.OrderMapper;
 import com.codecool.checkout.modell.jpa.Order;
 import com.codecool.checkout.modell.jpa.OrderItem;
+import com.codecool.checkout.repository.jpa.OrderRepository;
+import com.codecool.checkout.utils.OrderMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -33,9 +33,7 @@ public class OrderService {
 
     @Transactional
     public UUID placeOrder(NewOrderDTO newOrderDTO) {
-        PriceRequest priceRequest = createPriceRequest(newOrderDTO);
-
-        System.out.println(priceRequest);
+        PriceRequest priceRequest = createPriceRequest(newOrderDTO.items());
 
         PriceResponse prices = warehouseApi.getPrices(priceRequest);
 
@@ -48,7 +46,7 @@ public class OrderService {
         return orderRepository.save(order).getPublicID();
     }
 
-    public OrderDTO getOrderByPID(UUID orderPID) {
+    public OrderDTO getOrderDTOByPID(UUID orderPID) {
         return OrderMapper.toDTO(getOrderByPublicID(orderPID));
     }
 
@@ -78,7 +76,8 @@ public class OrderService {
     }
 
     private BigDecimal getTotalPrice(Set<OrderItem> orderItems) {
-        return orderItems.stream().map(OrderItem::getTotalPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
+        return orderItems.stream().map(OrderItem::getTotalPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     private Set<OrderItem> getOrderItems(Map<UUID, BigDecimal> prices, Map<UUID, Long> items) {
@@ -97,12 +96,12 @@ public class OrderService {
         return OrderItem.builder()
                 .itemPID(itemPID)
                 .amount(amount)
-                .price(itemPrice)
+                .unitPrice(itemPrice)
                 .build();
     }
 
-    private PriceRequest createPriceRequest(NewOrderDTO newOrderDTO) {
-        List<UUID> itemID = newOrderDTO.items().keySet().stream().toList();
+    private PriceRequest createPriceRequest(Map<UUID, Long> items) {
+        List<UUID> itemID = items.keySet().stream().toList();
         return new PriceRequest(itemID);
     }
 }

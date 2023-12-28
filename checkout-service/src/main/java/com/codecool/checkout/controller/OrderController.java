@@ -23,6 +23,6 @@ public class OrderController {
 
     @GetMapping("{orderPID}")
     public OrderDTO getOrderByPID(@PathVariable UUID orderPID) {
-        return orderService.getOrderByPID(orderPID);
+        return orderService.getOrderDTOByPID(orderPID);
     }
 }
