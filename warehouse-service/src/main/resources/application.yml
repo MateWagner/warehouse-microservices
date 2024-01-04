@@ -1,0 +1,32 @@
+checkout:
+  api:
+    url-prefix: http://localhost:8081
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+spring:
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: create-drop
+      show-sql: true
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: warehouse-service
+            client-secret: n1x1mBvcuJNeqnFh61xb4oJXjuih6uXp
+            authorization-grant-type: client_credentials
+        provider:
+          keycloak:
+            token-uri: http://localhost:9091/realms/warehouse-microservices/protocol/openid-connect/token
+            issuer-uri: http://localhost:9091/realms/warehouse-microservices
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9091/realms/warehouse-microservices
+          jwk-set-uri: http://localhost:9091/realms/warehouse-microservices/protocol/openid-connect/certs

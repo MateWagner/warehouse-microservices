@@ -22,19 +22,19 @@
     "notBefore" : 0,
     "groups" : [ ]
   }, {
-    "id" : "4f0071a5-6980-4da5-bc71-4157abb359e9",
-    "createdTimestamp" : 1699003539833,
-    "username" : "service-account-catalog-inventory-service",
+    "id" : "7d907f1f-80fa-4136-856b-68e46f1d9dfc",
+    "createdTimestamp" : 1701770834709,
+    "username" : "service-account-checkout-service",
     "enabled" : true,
     "totp" : false,
     "emailVerified" : false,
-    "serviceAccountClientId" : "catalog-inventory-service",
+    "serviceAccountClientId" : "checkout-service",
     "credentials" : [ ],
     "disableableCredentialTypes" : [ ],
     "requiredActions" : [ ],
     "realmRoles" : [ "default-roles-warehouse-microservices" ],
     "clientRoles" : {
-      "catalog-inventory-service" : [ "uma_protection" ]
+      "checkout-service" : [ "uma_protection" ]
     },
     "notBefore" : 0,
     "groups" : [ ]
@@ -56,19 +56,19 @@
     "notBefore" : 0,
     "groups" : [ ]
   }, {
-    "id" : "7d907f1f-80fa-4136-856b-68e46f1d9dfc",
-    "createdTimestamp" : 1701770834709,
-    "username" : "service-account-order-payment",
+    "id" : "4f0071a5-6980-4da5-bc71-4157abb359e9",
+    "createdTimestamp" : 1699003539833,
+    "username" : "service-account-warehouse-service",
     "enabled" : true,
     "totp" : false,
     "emailVerified" : false,
-    "serviceAccountClientId" : "order-payment",
+    "serviceAccountClientId" : "warehouse-service",
     "credentials" : [ ],
     "disableableCredentialTypes" : [ ],
     "requiredActions" : [ ],
     "realmRoles" : [ "default-roles-warehouse-microservices" ],
     "clientRoles" : {
-      "order-payment" : [ "uma_protection" ]
+      "warehouse-service" : [ "uma_protection" ]
     },
     "notBefore" : 0,
     "groups" : [ ]

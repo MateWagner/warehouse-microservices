@@ -4,3 +4,4 @@
 *mvnw.cmd
 *.mvn
 *target
+redis/data
