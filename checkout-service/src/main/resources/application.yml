@@ -1,6 +1,9 @@
 warehouse:
   api:
     url-prefix: http://localhost:8080
+amqp:
+  topic:
+    order-status: "q.order_status"
 
 server:
   port: 8081
@@ -39,3 +42,8 @@ spring:
         jwt:
           issuer-uri: http://localhost:9091/realms/warehouse-microservices
           jwk-set-uri: http://localhost:9091/realms/warehouse-microservices/protocol/openid-connect/certs
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
