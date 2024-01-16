@@ -36,12 +36,26 @@ services:
       - --import-realm
       - --http-relative-path=/auth
       - --hostname-debug=true
+    networks:
+      - default
 
   redis:
     image: redis:latest
     command: redis-server
     volumes:
       - ./redis/data:/var/lib/redis
+    networks:
+      - default
+
+  rabbitmq:
+    image: rabbitmq:management-alpine
+    ports:
+        - 15670:15672
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+    networks:
+      - default
 
   warehouse-service:
     build:
@@ -80,6 +94,7 @@ services:
       - database
       - keycloak
       - redis
+      - rabbitmq
     environment:
       SPRING_PROFILES_ACTIVE: DEV
       SPRING_DATA_REDIS_DATABASE: 0
@@ -100,9 +115,33 @@ services:
       SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_ISSUER_URI: http://app/auth/realms/warehouse-microservices
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI: http://app/auth/realms/warehouse-microservices
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI: http://app/auth/realms/warehouse-microservices/protocol/openid-connect/certs
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: admin
+      SPRING_RABBITMQ_PASSWORD: admin
       LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY: TRACE
     networks:
       - default
+
+  message-service:
+    build:
+      context: ./message-service
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+     - rabbitmq
+    environment:
+      SERVER_PORT: 8080
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: admin
+      SPRING_RABBITMQ_PASSWORD: admin
+      SPRING_MAIL_HOST: smtp.gmail.com
+      SPRING_MAIL_PORT: 587
+      SPRING_MAIL_PRPERTIES_MAIL_SMTP_AUTH: true
+      SPRING_MAIL_PRPERTIES_MAIL_SMTP_STARTTLS_ENABLE: true
+      SPRING_MAIL_USERNAME: ${GOOGLE_USERNAME}
+      SPRING_MAIL_PASSWORD: ${GOOGLE_APPLICATION_PASSWORD}
 
 networks:
   default:
