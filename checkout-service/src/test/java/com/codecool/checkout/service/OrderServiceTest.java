@@ -32,6 +32,8 @@ class OrderServiceTest {
     private WarehouseApiClient warehouseApi;
     @Mock
     private OrderItemCacheService orderItemCacheService;
+    @Mock
+    private RabbitMQService rabbitMQService;
 
     @InjectMocks
     private OrderService orderService;
@@ -57,6 +59,7 @@ class OrderServiceTest {
         when(warehouseApi.getPrices(any(PriceRequest.class))).thenReturn(priceResponse);
         doNothing().when(orderItemCacheService).addItemsToCache(anyMap());
         when(orderRepository.save(any(Order.class))).thenReturn(order);
+        doNothing().when(rabbitMQService).sendOrderChangeMail(any(Order.class));
 
         UUID result = orderService.placeOrder(newOrderDTO);
 
@@ -65,6 +68,7 @@ class OrderServiceTest {
         verify(warehouseApi, times(1)).getPrices(any(PriceRequest.class));
         verify(orderItemCacheService, times(1)).addItemsToCache(anyMap());
         verify(orderRepository, times(1)).save(any(Order.class));
+        verify(rabbitMQService).sendOrderChangeMail(any(Order.class));
     }
 
     @Test

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class MailingService {
+public class RabbitMQService {
     private final OrderStatusChangeProducer orderStatusChangeProducer;
     private final TokenClaimService tokenClaimService;
 

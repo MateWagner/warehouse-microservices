@@ -30,7 +30,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final WarehouseApiClient warehouseApi;
     private final OrderItemCacheService orderItemCacheService;
-    private final MailingService mailingService;
+    private final RabbitMQService rabbitMQService;
 
     @Transactional
     public UUID placeOrder(NewOrderDTO newOrderDTO) {
@@ -45,7 +45,7 @@ public class OrderService {
 
         order = orderRepository.save(order);
 
-        mailingService.sendOrderChangeMail(order);
+        rabbitMQService.sendOrderChangeMail(order);
 
         return order.getPublicID();
     }
