@@ -30,11 +30,11 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final WarehouseApiClient warehouseApi;
     private final OrderItemCacheService orderItemCacheService;
+    private final RabbitMQService rabbitMQService;
 
     @Transactional
     public UUID placeOrder(NewOrderDTO newOrderDTO) {
         PriceRequest priceRequest = createPriceRequest(newOrderDTO.items());
-
         PriceResponse prices = warehouseApi.getPrices(priceRequest);
 
         Set<OrderItem> orderItems = getOrderItems(prices.prices(), newOrderDTO.items());
@@ -43,7 +43,11 @@ public class OrderService {
 
         orderItemCacheService.addItemsToCache(newOrderDTO.items());
 
-        return orderRepository.save(order).getPublicID();
+        order = orderRepository.save(order);
+
+        rabbitMQService.sendOrderChangeMail(order);
+
+        return order.getPublicID();
     }
 
     public OrderDTO getOrderDTOByPID(UUID orderPID) {
