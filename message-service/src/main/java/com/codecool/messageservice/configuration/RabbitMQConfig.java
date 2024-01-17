@@ -1,4 +1,4 @@
-package com.codecool.messageservice.cnfiguration;
+package com.codecool.messageservice.configuration;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;

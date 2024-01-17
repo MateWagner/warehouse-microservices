@@ -19,12 +19,12 @@ public class MailService {
     public void sendOrderStatusMail(OrderStatusChange orderStatusChange) {
         OrderDTO order = orderStatusChange.order();
 
-        final SimpleMailMessage simpleMailMessage = getStatusMail(orderStatusChange, order);
+        final SimpleMailMessage simpleMailMessage = constructStatusMail(orderStatusChange, order);
 
         javaMailSender.send(simpleMailMessage);
     }
 
-    private SimpleMailMessage getStatusMail(OrderStatusChange orderStatusChange, OrderDTO order) {
+    private SimpleMailMessage constructStatusMail(OrderStatusChange orderStatusChange, OrderDTO order) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom(from);
         simpleMailMessage.setTo(orderStatusChange.email());
