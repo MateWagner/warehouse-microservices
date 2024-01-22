@@ -25,7 +25,8 @@ class WebSecurityOAuthResourceServerConfig {
                                 "/api/v1/address/**",
                                 "/api/v1/address",
                                 "/api/v1/order/**",
-                                "/api/v1/order"
+                                "/api/v1/order",
+                                "/api/v1/payment"
                         ).authenticated()
                         .anyRequest().permitAll()
                 )

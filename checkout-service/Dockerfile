@@ -1,7 +1,7 @@
 FROM maven:3.9.2-eclipse-temurin-17-alpine AS cache
 WORKDIR /app
 COPY pom.xml .
-RUN mvn dependency:go-offline
+RUN mvn dependency:resolve
 
 # Copy Source and Build jar
 FROM maven:3.9.2-eclipse-temurin-17-alpine as build

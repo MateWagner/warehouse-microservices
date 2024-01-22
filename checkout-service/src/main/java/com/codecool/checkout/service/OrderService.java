@@ -43,15 +43,23 @@ public class OrderService {
 
         orderItemCacheService.addItemsToCache(newOrderDTO.items());
 
-        order = orderRepository.save(order);
+        Order savedOrder = orderRepository.save(order);
 
-        rabbitMQService.sendOrderChangeMail(order);
+        rabbitMQService.sendOrderChangeMail(savedOrder);
 
-        return order.getPublicID();
+        return savedOrder.getPublicID();
     }
 
     public OrderDTO getOrderDTOByPID(UUID orderPID) {
         return OrderMapper.toDTO(getOrderByPublicID(orderPID));
+    }
+
+
+    protected void changeOrderStatus(OrderStatus orderStatus, UUID orderPID) {
+        Order order = getOrderByPublicID(orderPID);
+        order.setOrderStatus(orderStatus);
+        orderRepository.save(order);
+        rabbitMQService.sendOrderChangeMail(order);
     }
 
     protected Order getOrderByPublicID(UUID orderPID) {
@@ -108,4 +116,5 @@ public class OrderService {
         List<UUID> itemID = items.keySet().stream().toList();
         return new PriceRequest(itemID);
     }
+
 }

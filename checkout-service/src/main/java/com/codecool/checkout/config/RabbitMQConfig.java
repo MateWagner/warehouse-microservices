@@ -14,9 +14,17 @@ public class RabbitMQConfig {
     @Value("${amqp.topic.order-status}")
     private String ORDER_STATUS_QUEUE;
 
+    @Value("${amqp.topic.delivery}")
+    private String DELIVERY_QUEUE;
+
     @Bean
-    public Queue createMessageQueue() {
+    public Queue createOrderStatusMessageQueue() {
         return new Queue(ORDER_STATUS_QUEUE);
+    }
+
+    @Bean
+    public Queue createDeliveryMessageQueue() {
+        return new Queue(DELIVERY_QUEUE);
     }
 
     @Bean

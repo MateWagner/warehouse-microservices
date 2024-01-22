@@ -1,6 +1,6 @@
 package com.codecool.checkout.service;
 
-import com.codecool.checkout.modell.amqp.OrderStatusChange;
+import com.codecool.checkout.dto.OrderStatusChange;
 import com.codecool.checkout.modell.jpa.Order;
 import com.codecool.checkout.modell.jpa.OrderItem;
 import com.codecool.checkout.producer.OrderStatusChangeProducer;
