@@ -74,13 +74,14 @@ services:
       SPRING_DATASOURCE_PASSWORD: dbpassword
       SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/warehouse
       SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: true
-      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_CLIENT_ID: warehouse-service
-      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_CLIENT_SECRET: n1x1mBvcuJNeqnFh61xb4oJXjuih6uXp
-      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_AUTHORIZATION_GRANT_TYPE: client_credentials
       SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_TOKEN_URI: http://app/auth/realms/warehouse-microservices/protocol/openid-connect/token
       SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_ISSUER_URI: http://app/auth/realms/warehouse-microservices
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI: http://app/auth/realms/warehouse-microservices
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI: http://app/auth/realms/warehouse-microservices/protocol/openid-connect/certs
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: admin
+      SPRING_RABBITMQ_PASSWORD: admin
       LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY: TRACE
     networks:
       - default
@@ -108,9 +109,6 @@ services:
       SPRING_DATASOURCE_PASSWORD: dbpassword
       SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/warehouse
       SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: true
-      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_CLIENT_ID: checkout-service
-      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_CLIENT_SECRET: 5pv6GlBYGdW2ahvoB689AIQyAbEv4owg
-      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_AUTHORIZATION_GRANT_TYPE: client_credentials
       SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_TOKEN_URI: http://app/auth/realms/warehouse-microservices/protocol/openid-connect/token
       SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_ISSUER_URI: http://app/auth/realms/warehouse-microservices
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI: http://app/auth/realms/warehouse-microservices
