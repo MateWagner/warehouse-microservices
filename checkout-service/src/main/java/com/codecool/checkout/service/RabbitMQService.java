@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 public class RabbitMQService {
     private final OrderStatusChangeProducer orderStatusChangeProducer;
     private final DeliveryProducer deliveryProducer;
-    private final TokenClaimService tokenClaimService;
     private final AddressService addressService;
 
     public void sendOrderChangeMail(Order order) {
@@ -34,19 +33,21 @@ public class RabbitMQService {
     }
 
     private DeliveryRequest constructDeliveryRequest(Order order) {
-        final Map<UUID, Long> itemMap = extractItemPIDAndAmount(order.getOrderItems());
-        final UUID addressPID = addressService.getUserPreferredAddressPID(order.getUserID());
+        Map<UUID, Long> itemMap = extractItemPIDAndAmount(order.getOrderItems());
+        UUID addressPID = addressService.getUserPreferredAddressPID(order.getUserID());
+        UUID orderPID = order.getPublicID();
         return new DeliveryRequest(
                 itemMap,
                 addressPID,
+                orderPID,
                 order.getOrderStatus()
         );
     }
 
     private OrderStatusChange createOrderStatusChange(Order order) {
         return new OrderStatusChange(
-                tokenClaimService.getCurrentUserEmail(),
-                tokenClaimService.getCurrentUserName(),
+                order.getEmail(),
+                order.getName(),
                 OrderMapper.toDTO(order)
         );
     }

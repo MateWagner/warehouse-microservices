@@ -5,5 +5,5 @@ import com.codecool.checkout.data.OrderStatus;
 import java.util.Map;
 import java.util.UUID;
 
-public record DeliveryRequest(Map<UUID, Long> itemList, UUID addressPID, OrderStatus orderStatus) {
+public record DeliveryRequest(Map<UUID, Long> itemMap, UUID addressPID, UUID orderPID, OrderStatus orderStatus) {
 }

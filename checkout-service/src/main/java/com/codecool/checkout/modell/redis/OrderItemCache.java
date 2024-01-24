@@ -22,4 +22,8 @@ public class OrderItemCache implements Serializable {
     public void addAmount(Long amount) {
         this.amount += amount;
     }
+
+    public void subtractAmount(Long amount) {
+        this.amount -= amount;
+    }
 }

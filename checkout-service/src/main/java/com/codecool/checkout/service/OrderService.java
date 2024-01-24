@@ -13,6 +13,7 @@ import com.codecool.checkout.utils.OrderMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -31,6 +32,7 @@ public class OrderService {
     private final WarehouseApiClient warehouseApi;
     private final OrderItemCacheService orderItemCacheService;
     private final RabbitMQService rabbitMQService;
+    private final TokenClaimService tokenClaimService;
 
     @Transactional
     public UUID placeOrder(NewOrderDTO newOrderDTO) {
@@ -50,14 +52,25 @@ public class OrderService {
         return savedOrder.getPublicID();
     }
 
+    public ResponseEntity<String> confirmDelivery(UUID orderPID) {
+        System.out.println(orderPID);
+        OrderStatus delivered = OrderStatus.DELIVERED;
+        changeOrderStatus(delivered, orderPID);
+        Order order = getOrderByPublicID(orderPID);
+        Map<UUID, Long> itemMap = order.getOrderItems().stream().collect(Collectors.toMap(OrderItem::getItemPID, OrderItem::getAmount));
+        orderItemCacheService.removeItemsFromCache(itemMap);
+        return ResponseEntity.ok("ok");
+    }
+
     public OrderDTO getOrderDTOByPID(UUID orderPID) {
         return OrderMapper.toDTO(getOrderByPublicID(orderPID));
     }
 
-
     protected void changeOrderStatus(OrderStatus orderStatus, UUID orderPID) {
+        LocalDateTime now = LocalDateTime.now();
         Order order = getOrderByPublicID(orderPID);
         order.setOrderStatus(orderStatus);
+        order.setUpdated(now);
         orderRepository.save(order);
         rabbitMQService.sendOrderChangeMail(order);
     }
@@ -84,6 +97,8 @@ public class OrderService {
                 .created(now)
                 .updated(now)
                 .orderStatus(OrderStatus.RESERVED)
+                .email(tokenClaimService.getCurrentUserEmail())
+                .name(tokenClaimService.getCurrentUserName())
                 .build();
     }
 

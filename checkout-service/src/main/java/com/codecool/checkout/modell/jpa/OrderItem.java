@@ -30,6 +30,8 @@ public class OrderItem {
 
     private Long amount;
     private BigDecimal unitPrice;
+    @ManyToOne
+    private Order order_id;
 
     public BigDecimal getTotalPrice() {
         return unitPrice.multiply(BigDecimal.valueOf(amount));

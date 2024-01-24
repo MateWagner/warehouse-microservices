@@ -18,6 +18,7 @@ import java.util.UUID;
 @Builder
 @Getter
 @Setter
+@ToString
 @EqualsAndHashCode
 public class Order {
 
@@ -45,6 +46,8 @@ public class Order {
     private LocalDateTime created;
 
     private LocalDateTime updated;
+    private String email;
+    private String name;
 
     @OneToMany(
             cascade = CascadeType.ALL

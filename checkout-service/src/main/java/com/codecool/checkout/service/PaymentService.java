@@ -5,6 +5,7 @@ import com.codecool.checkout.api.dto.PaymentApiRequest;
 import com.codecool.checkout.data.OrderStatus;
 import com.codecool.checkout.dto.PaymentRequest;
 import com.codecool.checkout.modell.jpa.Order;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class PaymentService {
     private final PaymentApiClient paymentApiClient;
     private final RabbitMQService mqService;
 
-
+    @Transactional
     public void payment(PaymentRequest paymentRequest) {
         UUID orderPID = paymentRequest.orderPID();
         Order order = orderService.getOrderByPublicID(orderPID);
