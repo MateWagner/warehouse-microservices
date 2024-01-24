@@ -13,6 +13,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @EqualsAndHashCode
+@ToString
 public class InventoryProduct {
     @Id
     @JsonIgnore
@@ -35,5 +36,9 @@ public class InventoryProduct {
     public InventoryProduct(UUID itemPID, Long quantity) {
         this.itemPID = itemPID;
         this.quantity = quantity;
+    }
+
+    public void decriesQuantity(Long amount) {
+        quantity = quantity - amount;
     }
 }

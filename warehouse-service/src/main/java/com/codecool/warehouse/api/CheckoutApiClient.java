@@ -4,6 +4,7 @@ import com.codecool.warehouse.api.dto.CachedProduct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -20,7 +21,6 @@ public class CheckoutApiClient {
     private String URL_PREFIX;
 
     public CachedProduct getReservedAmountFromOrderService(UUID itemPID) {
-        // TODO concrete implementation when it ready
         try {
             return webClient.get()
                     .uri(URL_PREFIX + "/api/v1/cache/" + itemPID)
@@ -35,5 +35,20 @@ public class CheckoutApiClient {
                     "Can't reach Checkout service check back later"
             );
         }
+    }
+
+    public void sendItemDeliveryConformation(UUID orderPID) {
+        try {
+            ResponseEntity<String> response = webClient.post()
+                    .uri(URL_PREFIX + "/api/v1/order/confirm/" + orderPID)
+                    .bodyValue("")
+                    .retrieve()
+                    .toEntity(String.class)
+                    .block();
+            System.out.println(response.getStatusCode());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
     }
 }
