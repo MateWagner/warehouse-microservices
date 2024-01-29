@@ -6,3 +6,5 @@
 *target
 redis/data
 .env
+*/node_modules
+*/.next
