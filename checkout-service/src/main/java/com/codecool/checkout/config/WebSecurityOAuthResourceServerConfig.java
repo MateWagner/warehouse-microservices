@@ -20,12 +20,16 @@ class WebSecurityOAuthResourceServerConfig {
 
         http
                 .authorizeHttpRequests(access -> access
-                        .requestMatchers("/api/v1/cache/*").hasAuthority("SCOPE_system")
+                        .requestMatchers(
+                                "/api/v1/cache/*",
+                                "/api/v1/order/confirm/**"
+                        ).hasAuthority("SCOPE_system")
                         .requestMatchers(
                                 "/api/v1/address/**",
                                 "/api/v1/address",
                                 "/api/v1/order/**",
-                                "/api/v1/order"
+                                "/api/v1/order",
+                                "/api/v1/payment"
                         ).authenticated()
                         .anyRequest().permitAll()
                 )

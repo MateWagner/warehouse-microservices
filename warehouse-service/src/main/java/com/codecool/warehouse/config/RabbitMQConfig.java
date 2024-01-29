@@ -1,4 +1,4 @@
-package com.codecool.checkout.config;
+package com.codecool.warehouse.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -11,16 +11,9 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMQConfig {
-    @Value("${amqp.topic.order-status}")
-    private String ORDER_STATUS_QUEUE;
 
     @Value("${amqp.topic.delivery}")
     private String DELIVERY_QUEUE;
-
-    @Bean
-    public Queue createOrderStatusMessageQueue() {
-        return new Queue(ORDER_STATUS_QUEUE);
-    }
 
     @Bean
     public Queue createDeliveryMessageQueue() {

@@ -11,6 +11,7 @@ public record NewAddressDTO(
         String city,
         String street,
         String areaName,
-        String houseNumber
+        String houseNumber,
+        boolean isPreferred
 ) {
 }

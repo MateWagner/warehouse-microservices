@@ -42,6 +42,9 @@ public class AddressService {
         return addressesDTO;
     }
 
+    protected UUID getUserPreferredAddressPID(UUID userID) {
+        return addressRepository.preferredAddressByUser(userID);
+    }
     private Address generateAddress(NewAddressDTO newAddressDTO) {
         return Address.builder()
                 .publicID(UUID.randomUUID())
@@ -61,6 +64,7 @@ public class AddressService {
                 .houseNumber(houseNumberService.createAndOrGetHouseNumber(
                         newAddressDTO.houseNumber()
                 ))
+                .isPreferred(newAddressDTO.isPreferred())
                 .build();
     }
 

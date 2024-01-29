@@ -17,14 +17,14 @@ import java.util.UUID;
 public class OrderItemCacheService {
     private final OrderItemCacheRepository itemCacheRepository;
 
-    public void addItemsToCache(Map<UUID, Long> items) {
-        items.keySet().forEach(itemPID -> {
+    public void addItemsToCache(Map<UUID, Long> itemMap) {
+        itemMap.keySet().forEach(itemPID -> {
             try {
                 OrderItemCache cacheItem = getById(itemPID);
-                cacheItem.addAmount(items.get(itemPID));
+                cacheItem.addAmount(itemMap.get(itemPID));
                 itemCacheRepository.save(cacheItem);
             } catch (HttpClientErrorException e) {
-                OrderItemCache cacheItem = new OrderItemCache(itemPID, items.get(itemPID));
+                OrderItemCache cacheItem = new OrderItemCache(itemPID, itemMap.get(itemPID));
                 itemCacheRepository.save(cacheItem);
             }
         });
@@ -42,5 +42,21 @@ public class OrderItemCacheService {
                                 "Can't find item in the cache with ID: " + itemPID
                         )
                 );
+    }
+
+    public void removeItemsFromCache(Map<UUID, Long> itemMap) {
+        itemMap.forEach(this::searchAndDecreaseCache);
+
+    }
+
+    private void searchAndDecreaseCache(UUID itemPID, Long amount) {
+        OrderItemCache item = getById(itemPID);
+        item.subtractAmount(amount);
+        if (item.getAmount().equals(0L)) {
+            itemCacheRepository.delete(item);
+            return;
+        }
+
+        itemCacheRepository.save(item);
     }
 }

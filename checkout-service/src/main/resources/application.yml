@@ -4,6 +4,7 @@ warehouse:
 amqp:
   topic:
     order-status: "q.order_status"
+    delivery: "q.delivery"
 
 server:
   port: 8081

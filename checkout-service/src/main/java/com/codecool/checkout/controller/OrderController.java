@@ -5,6 +5,7 @@ import com.codecool.checkout.dto.OrderDTO;
 import com.codecool.checkout.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -24,5 +25,10 @@ public class OrderController {
     @GetMapping("{orderPID}")
     public OrderDTO getOrderByPID(@PathVariable UUID orderPID) {
         return orderService.getOrderDTOByPID(orderPID);
+    }
+
+    @PostMapping("confirm/{orderPID}")
+    public ResponseEntity<String> confirmOrderDelivery(@PathVariable UUID orderPID) {
+        return orderService.confirmDelivery(orderPID);
     }
 }

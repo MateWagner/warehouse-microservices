@@ -34,6 +34,8 @@ class OrderServiceTest {
     private OrderItemCacheService orderItemCacheService;
     @Mock
     private RabbitMQService rabbitMQService;
+    @Mock
+    private TokenClaimService tokenClaimService;
 
     @InjectMocks
     private OrderService orderService;
@@ -60,6 +62,8 @@ class OrderServiceTest {
         doNothing().when(orderItemCacheService).addItemsToCache(anyMap());
         when(orderRepository.save(any(Order.class))).thenReturn(order);
         doNothing().when(rabbitMQService).sendOrderChangeMail(any(Order.class));
+        when(tokenClaimService.getCurrentUserEmail()).thenReturn("mail@mail.com");
+        when(tokenClaimService.getCurrentUserName()).thenReturn("name");
 
         UUID result = orderService.placeOrder(newOrderDTO);
 
@@ -69,6 +73,25 @@ class OrderServiceTest {
         verify(orderItemCacheService, times(1)).addItemsToCache(anyMap());
         verify(orderRepository, times(1)).save(any(Order.class));
         verify(rabbitMQService).sendOrderChangeMail(any(Order.class));
+    }
+
+    @Test
+    void cantPlaceOrder() {
+        UUID userID = UUID.randomUUID();
+        UUID itemPID = UUID.randomUUID();
+        Map<UUID, Long> itemMap = new HashMap<>();
+        itemMap.put(itemPID, 2L);
+        NewOrderDTO newOrderDTO = new NewOrderDTO(userID, itemMap);
+
+        Map<UUID, BigDecimal> priceResponseMap = new HashMap<>();
+        priceResponseMap.put(itemPID, BigDecimal.valueOf(10.25));
+        PriceResponse priceResponse = new PriceResponse(priceResponseMap);
+
+        when(warehouseApi.getPrices(any(PriceRequest.class))).thenReturn(priceResponse);
+        when(tokenClaimService.getCurrentUserEmail()).thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
+
+        assertThrows(HttpClientErrorException.class, () -> orderService.placeOrder(newOrderDTO));
+
     }
 
     @Test

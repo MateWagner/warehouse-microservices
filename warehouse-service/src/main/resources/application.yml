@@ -6,7 +6,15 @@ logging:
     org:
       springframework:
         security: DEBUG
+amqp:
+  topic:
+    delivery: "q.delivery"
 spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
   jpa:
     properties:
       hibernate:
