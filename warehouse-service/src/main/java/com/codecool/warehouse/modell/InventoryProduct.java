@@ -38,7 +38,7 @@ public class InventoryProduct {
         this.quantity = quantity;
     }
 
-    public void decriesQuantity(Long amount) {
+    public void decreaseQuantity(Long amount) {
         quantity = quantity - amount;
     }
 }

@@ -45,14 +45,13 @@ public class OrderItemCacheService {
     }
 
     public void removeItemsFromCache(Map<UUID, Long> itemMap) {
-        itemMap.forEach(this::decriesCache);
+        itemMap.forEach(this::searchAndDecreaseCache);
 
     }
 
-    private void decriesCache(UUID itemPID, Long amount) {
+    private void searchAndDecreaseCache(UUID itemPID, Long amount) {
         OrderItemCache item = getById(itemPID);
         item.subtractAmount(amount);
-        System.out.println(item);
         if (item.getAmount().equals(0L)) {
             itemCacheRepository.delete(item);
             return;

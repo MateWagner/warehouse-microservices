@@ -18,10 +18,9 @@ public class FakePackageService implements PackageService {
     @Transactional
     @Override
     public void prepareDelivery(DeliveryRequest deliveryRequest) {
-        System.out.println("items been removed!!!!!!!!!!!!!!!!!!");
         Map<UUID, Long> itemMap = deliveryRequest.itemMap();
         UUID orderPID = deliveryRequest.orderPID();
         productService.changeInventoryOnItems(itemMap);
-        checkoutApiClient.sendItemDeliveryConformation(orderPID);
+        checkoutApiClient.sendItemDeliveryConfirmation(orderPID);
     }
 }

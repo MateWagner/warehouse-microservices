@@ -27,13 +27,12 @@ public class ProductService {
     }
 
     protected void changeInventoryOnItems(Map<UUID, Long> itemMap) {
-        itemMap.forEach(this::decriesQuantityOnProduct);
+        itemMap.forEach(this::decreaseQuantityOnProduct);
     }
 
-    private void decriesQuantityOnProduct(UUID itemPID, Long amount) {
+    private void decreaseQuantityOnProduct(UUID itemPID, Long amount) {
         InventoryProduct target = getProductByItemPID(itemPID);
-        target.decriesQuantity(amount);
-        System.out.println(target);
+        target.decreaseQuantity(amount);
         productRepository.save(target);
     }
 

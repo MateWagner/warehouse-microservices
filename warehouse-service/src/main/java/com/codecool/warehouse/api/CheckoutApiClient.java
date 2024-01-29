@@ -37,17 +37,18 @@ public class CheckoutApiClient {
         }
     }
 
-    public void sendItemDeliveryConformation(UUID orderPID) {
-        try {
+    public void sendItemDeliveryConfirmation(UUID orderPID) {
             ResponseEntity<String> response = webClient.post()
                     .uri(URL_PREFIX + "/api/v1/order/confirm/" + orderPID)
                     .bodyValue("")
                     .retrieve()
                     .toEntity(String.class)
                     .block();
-            System.out.println(response.getStatusCode());
-        } catch (Exception e) {
-            System.out.println(e);
+        if (response == null || response.getStatusCode().isError()) {
+            throw new HttpClientErrorException(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Can't reach Checkout service check back later"
+            );
         }
 
     }

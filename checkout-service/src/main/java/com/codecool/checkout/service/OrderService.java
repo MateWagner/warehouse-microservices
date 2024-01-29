@@ -53,11 +53,16 @@ public class OrderService {
     }
 
     public ResponseEntity<String> confirmDelivery(UUID orderPID) {
-        System.out.println(orderPID);
         OrderStatus delivered = OrderStatus.DELIVERED;
         changeOrderStatus(delivered, orderPID);
         Order order = getOrderByPublicID(orderPID);
-        Map<UUID, Long> itemMap = order.getOrderItems().stream().collect(Collectors.toMap(OrderItem::getItemPID, OrderItem::getAmount));
+        Map<UUID, Long> itemMap = order.getOrderItems().stream()
+                .collect(
+                        Collectors.toMap(
+                                OrderItem::getItemPID,
+                                OrderItem::getAmount
+                        )
+                );
         orderItemCacheService.removeItemsFromCache(itemMap);
         return ResponseEntity.ok("ok");
     }

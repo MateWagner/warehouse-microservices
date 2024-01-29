@@ -40,7 +40,6 @@ public class ItemService {
                 sortProperties,
                 sortDirection
         );
-        System.out.println(result);
         return result.map(ItemMapper::itemToItemDto);
     }
 
