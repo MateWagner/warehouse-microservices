@@ -5,7 +5,7 @@ RUN npm i
 
 FROM node:21.6.0-alpine AS build
 WORKDIR /app
-COPY --from=cache /app/node_modules .
+COPY --from=cache /app/node_modules ./node_modules
 COPY . .
 RUN npm i 
 RUN npm run build
