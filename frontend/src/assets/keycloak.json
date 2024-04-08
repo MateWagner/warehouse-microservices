@@ -1,0 +1,8 @@
+{
+  "url": "http://localhost:9091",
+  "realm": "warehouse-microservices",
+  "clientId": "frontend",
+  "onLoad": "check-sso", 
+  "KeycloakResponseType": "code"
+}
+//check-sso | login-required

@@ -10,7 +10,9 @@ public class ItemMapper {
                 catalogItem.getPublicId(),
                 catalogItem.getName(),
                 catalogItem.getDescription(),
-                CategoryMapper.categoryToDTO(catalogItem.getCategory())
+                CategoryMapper.categoryToDTO(catalogItem.getCategory()),
+                catalogItem.getPrice(),
+                catalogItem.getImgUrl()
         );
     }
 }

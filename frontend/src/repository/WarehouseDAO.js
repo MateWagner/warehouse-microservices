@@ -18,8 +18,26 @@ const pageAndSort = async (
   }
 };
 
+const getProductById = async (id) => {
+  try {
+    return axiosClient.get(`${WAREHOUSE_BASE_URL}item/${id}`);
+  } catch (error) {
+    throw Error("Can't fetch Item details");
+  }
+};
+
+const getInventoryInformation = (id) => {
+  try {
+    return axiosClient.get(`${WAREHOUSE_BASE_URL}inventory/${id}`);
+  } catch (error) {
+    throw Error("Can't fetch Item inventory information");
+  }
+};
+
 const WarehouseDAO = {
   pageAndSort,
+  getProductById,
+  getInventoryInformation,
 };
 
 export default WarehouseDAO;

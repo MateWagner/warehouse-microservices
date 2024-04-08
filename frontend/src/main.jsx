@@ -1,18 +1,20 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App.jsx";
+import ReactDOM from "react-dom/client";
+import { RouterProvider } from "react-router-dom";
 import UserService from "./services/UserService";
 import HttpService from "./services/HttpService.js";
+import router from "./routes/router.jsx";
+import theme from "./theme/theme";
+import { ThemeProvider } from "@mui/material";
+import { CssBaseline } from "@mui/material";
 
-// createRoot(document.getElementById("root")).render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>
-// );
 const renderApp = () =>
-  createRoot(document.getElementById("root")).render(
+  ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
-      <App />
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </React.StrictMode>
   );
 UserService.initKeycloak(renderApp);
