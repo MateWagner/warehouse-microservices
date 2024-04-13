@@ -1,0 +1,1355 @@
+{
+	"info": {
+		"_postman_id": "f772f96c-5d24-4f9f-a66e-f84482024ed5",
+		"name": "Admin auth-context",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24016151",
+		"_collection_link": "https://galactic-moon-586750.postman.co/workspace/warehouse~9e1adb27-fc86-463d-b806-06f5041aaa71/collection/24016151-f772f96c-5d24-4f9f-a66e-f84482024ed5?action=share&source=collection_link&creator=24016151"
+	},
+	"item": [
+		{
+			"name": "Warehouse",
+			"item": [
+				{
+					"name": "Item Controller",
+					"item": [
+						{
+							"name": "V1",
+							"item": [
+								{
+									"name": "not auth",
+									"item": [
+										{
+											"name": "/pageAndSort",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{warehouse_url}}/api/v1/item/pageAndSort?pageNumber=0&pageSize=10&sortProperties=name&sortDirection=ASC",
+													"host": [
+														"{{warehouse_url}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"item",
+														"pageAndSort"
+													],
+													"query": [
+														{
+															"key": "pageNumber",
+															"value": "0"
+														},
+														{
+															"key": "pageSize",
+															"value": "10"
+														},
+														{
+															"key": "sortProperties",
+															"value": "name"
+														},
+														{
+															"key": "sortDirection",
+															"value": "ASC"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "itemPID",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{warehouse_url}}/api/v1/item/5001f39d-973b-4ced-96c3-437a480eec34",
+													"host": [
+														"{{warehouse_url}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"item",
+														"5001f39d-973b-4ced-96c3-437a480eec34"
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"auth": {
+										"type": "noauth"
+									},
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									]
+								},
+								{
+									"name": "pageAndSort",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{warehouse_url}}/api/v1/item/pageAndSort?pageNumber=0&pageSize=10&sortProperties=name&sortDirection=ASC",
+											"host": [
+												"{{warehouse_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"item",
+												"pageAndSort"
+											],
+											"query": [
+												{
+													"key": "pageNumber",
+													"value": "0"
+												},
+												{
+													"key": "pageSize",
+													"value": "10"
+												},
+												{
+													"key": "sortProperties",
+													"value": "name"
+												},
+												{
+													"key": "sortDirection",
+													"value": "ASC"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "itemPID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{warehouse_url}}/api/v1/item/5001f39d-973b-4ced-96c3-437a480eec34",
+											"host": [
+												"{{warehouse_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"item",
+												"5001f39d-973b-4ced-96c3-437a480eec34"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "WrongItemPID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {\r",
+													"    pm.response.to.have.status(404);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{warehouse_url}}/api/v1/item/5001f39d-973b-4ced-96c3-437a480eec30",
+											"host": [
+												"{{warehouse_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"item",
+												"5001f39d-973b-4ced-96c3-437a480eec30"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "NotUUID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{warehouse_url}}/api/v1/item/5",
+											"host": [
+												"{{warehouse_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"item",
+												"5"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "prices",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 403\", function () {\r",
+													"    pm.response.to.have.status(403);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"itemPIDS\": [\"5001f39d-973b-4ced-96c3-437a480eec34\"]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{warehouse_url}}/api/v1/item/prices",
+											"host": [
+												"{{warehouse_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"item",
+												"prices"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Inventory Controller",
+					"item": [
+						{
+							"name": "V1",
+							"item": [
+								{
+									"name": "no auth",
+									"item": [
+										{
+											"name": "itemPID",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{warehouse_url}}/api/v1/inventory/5001f39d-973b-4ced-96c3-437a480eec34",
+													"host": [
+														"{{warehouse_url}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"inventory",
+														"5001f39d-973b-4ced-96c3-437a480eec34"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "WrongItemPID",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 404\", function () {\r",
+															"    pm.response.to.have.status(404);\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{warehouse_url}}/api/v1/inventory/5001f39d-973b-4ced-96c3-437a480eec30",
+													"host": [
+														"{{warehouse_url}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"inventory",
+														"5001f39d-973b-4ced-96c3-437a480eec30"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "NotUUID",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 404\", function () {\r",
+															"    pm.response.to.have.status(404);\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{warehouse_url}}/api/v1/inventory/5001f39d-973b-4ced-96c3-437a480eec30",
+													"host": [
+														"{{warehouse_url}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"inventory",
+														"5001f39d-973b-4ced-96c3-437a480eec30"
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"auth": {
+										"type": "noauth"
+									},
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									]
+								},
+								{
+									"name": "itemPID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{warehouse_url}}/api/v1/inventory/5001f39d-973b-4ced-96c3-437a480eec34",
+											"host": [
+												"{{warehouse_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"inventory",
+												"5001f39d-973b-4ced-96c3-437a480eec34"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "WrongItemPID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {\r",
+													"    pm.response.to.have.status(404);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{warehouse_url}}/api/v1/inventory/5001f39d-973b-4ced-96c3-437a480eec30",
+											"host": [
+												"{{warehouse_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"inventory",
+												"5001f39d-973b-4ced-96c3-437a480eec30"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "NotUUID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{warehouse_url}}/api/v1/inventory/5",
+											"host": [
+												"{{warehouse_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"inventory",
+												"5"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Checkout",
+			"item": [
+				{
+					"name": "Cache Controller",
+					"item": [
+						{
+							"name": "v1",
+							"item": [
+								{
+									"name": "no aut",
+									"item": [
+										{
+											"name": "cache/itemPID",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 401\", function () {\r",
+															"    pm.response.to.have.status(401);\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{checkout_url}}/api/v1/cache/5001f39d-973b-4ced-96c3-437a480eec34",
+													"host": [
+														"{{checkout_url}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"cache",
+														"5001f39d-973b-4ced-96c3-437a480eec34"
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"auth": {
+										"type": "noauth"
+									},
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									]
+								},
+								{
+									"name": "cache/itemPID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 403\", function () {\r",
+													"    pm.response.to.have.status(403);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{checkout_url}}/api/v1/cache/5001f39d-973b-4ced-96c3-437a480eec34",
+											"host": [
+												"{{checkout_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"cache",
+												"5001f39d-973b-4ced-96c3-437a480eec34"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Order Controller",
+					"item": [
+						{
+							"name": "v1",
+							"item": [
+								{
+									"name": "no auth",
+									"item": [
+										{
+											"name": "order",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 401\", function () {\r",
+															"    pm.response.to.have.status(401);\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"userID\": \"a311cab0-9d92-11ee-8c90-0242ac120002\",\r\n    \"items\": {\r\n        \"5001f39d-973b-4ced-96c3-437a480eec34\":2\r\n    }\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{checkout_url}}/api/v1/order",
+													"host": [
+														"{{checkout_url}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"order"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "orderPID",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 401\", function () {\r",
+															"    pm.response.to.have.status(401);\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"userID\": \"a311cab0-9d92-11ee-8c90-0242ac120002\",\r\n    \"items\": {\r\n        \"5\":2\r\n    }\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{checkout_url}}/api/v1/order/b820a652-d3f8-4ab8-97a4-5f99099cd39c",
+													"host": [
+														"{{checkout_url}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"order",
+														"b820a652-d3f8-4ab8-97a4-5f99099cd39c"
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"auth": {
+										"type": "noauth"
+									},
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									]
+								},
+								{
+									"name": "order",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {\r",
+													"    pm.response.to.have.status(201);\r",
+													"});\r",
+													"pm.globals.set(\"orderPID\", pm.response.json());\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userID\": \"3fae8b1d-cd0b-4dae-8d7e-e3d234941058\",\r\n    \"items\": {\r\n        \"5001f39d-973b-4ced-96c3-437a480eec34\":2\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{checkout_url}}/api/v1/order",
+											"host": [
+												"{{checkout_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"order"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "orderWrongItemPID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {\r",
+													"    pm.response.to.have.status(404);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userID\": \"a311cab0-9d92-11ee-8c90-0242ac120002\",\r\n    \"items\": {\r\n        \"5001f39d-973b-4ced-96c3-437a480eec30\":2\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{checkout_url}}/api/v1/order",
+											"host": [
+												"{{checkout_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"order"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "orderNotUUID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userID\": \"a311cab0-9d92-11ee-8c90-0242ac120002\",\r\n    \"items\": {\r\n        \"5\":2\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{checkout_url}}/api/v1/order",
+											"host": [
+												"{{checkout_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"order"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "orderPID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userID\": \"a311cab0-9d92-11ee-8c90-0242ac120002\",\r\n    \"items\": {\r\n        \"5\":2\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{checkout_url}}/api/v1/order/{{orderPID}}",
+											"host": [
+												"{{checkout_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"order",
+												"{{orderPID}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "AddressController",
+					"item": [
+						{
+							"name": "v1",
+							"item": [
+								{
+									"name": "no auth",
+									"item": [
+										{
+											"name": "POST",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 401\", function () {\r",
+															"    pm.response.to.have.status(401);\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"userID\":\"b820a652-d3f8-4ab8-97a4-5f99099cd39c\",\r\n    \"postcode\":\"8080\",\r\n    \"city\":\"Budapest\",\r\n    \"street\":\"Buda\",\r\n    \"areaName\":\"Utca\",\r\n    \"houseNumber\":\"23/B\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{checkout_url}}/api/v1/address",
+													"host": [
+														"{{checkout_url}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"address"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "addressPID",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 401\", function () {\r",
+															"    pm.response.to.have.status(401);\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"userID\":\"b820a652-d3f8-4ab8-97a4-5f99099cd39c\",\r\n    \"postcode\":\"8080\",\r\n    \"city\":\"Budapest\",\r\n    \"street\":\"Buda\",\r\n    \"areaName\":\"Utca\",\r\n    \"houseNumber\":\"23/B\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{checkout_url}}/api/v1/address/{{addressPID}}",
+													"host": [
+														"{{checkout_url}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"address",
+														"{{addressPID}}"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "userID",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 401\", function () {\r",
+															"    pm.response.to.have.status(401);\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{checkout_url}}/api/v1/address/user/b820a652-d3f8-4ab8-97a4-5f99099cd39c",
+													"host": [
+														"{{checkout_url}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"address",
+														"user",
+														"b820a652-d3f8-4ab8-97a4-5f99099cd39c"
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"auth": {
+										"type": "noauth"
+									},
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									]
+								},
+								{
+									"name": "POST",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Successful POST request\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+													"});\r",
+													"pm.globals.set(\"addressPID\", pm.response.json());"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userID\":\"3fae8b1d-cd0b-4dae-8d7e-e3d234941058\",\r\n    \"postcode\":\"8080\",\r\n    \"city\":\"Budapest\",\r\n    \"street\":\"Buda\",\r\n    \"areaName\":\"Utca\",\r\n    \"houseNumber\":\"23/B\",\r\n    \"isPreferred\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{checkout_url}}/api/v1/address",
+											"host": [
+												"{{checkout_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"address"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "addressPID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{checkout_url}}/api/v1/address/{{addressPID}}",
+											"host": [
+												"{{checkout_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"address",
+												"{{addressPID}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "userID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{checkout_url}}/api/v1/address/user/b820a652-d3f8-4ab8-97a4-5f99099cd39c",
+											"host": [
+												"{{checkout_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"address",
+												"user",
+												"b820a652-d3f8-4ab8-97a4-5f99099cd39c"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "wrongUserID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {\r",
+													"    pm.response.to.have.status(404);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{checkout_url}}/api/v1/address/user/b820a652-d3f8-4ab8-97a4-5f99099cd39a",
+											"host": [
+												"{{checkout_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"address",
+												"user",
+												"b820a652-d3f8-4ab8-97a4-5f99099cd39a"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Payment",
+			"item": [
+				{
+					"name": "v1",
+					"item": [
+						{
+							"name": "payment",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cardNumber\": \"cardnumber\",\r\n    \"exp\": \"04/04\",\r\n    \"cv\":123,\r\n    \"nameOnCard\": \"user name\",\r\n    \"orderPID\":\"{{orderPID}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{checkout_url}}/api/v1/payment",
+									"host": [
+										"{{checkout_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"payment"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "accessTokenUrl",
+				"value": "{{token_url}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "admin@admin.com",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "admin",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "password_credentials",
+				"type": "string"
+			},
+			{
+				"key": "authUrl",
+				"value": "http://localhost:9091/realms/warehouse-microservices/protocol/openid-connect/token",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "frontend",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
