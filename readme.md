@@ -2,7 +2,7 @@
 
 ## About Project
 
-This is my solo project, designed to be a platform that familiarizes me with industry-standard applications and their integration into a project. I've taken it a step further by building it as a microservices architecture.
+This is my solo project, designed to be a platform that familiarizes with industry-standard applications and their integration into a project. I've taken it a step further by building it as a microservices architecture.
 
 The project is centered around the concept of an e-commerce application. It features a Warehouse, Checkout, and Messaging services. The Frontend is currently under development. However, due to time constraints and commitments to another project, progress has slowed.
 
@@ -86,7 +86,7 @@ The service also utilizes Spring Security OAuth2 for secure authentication and a
 
 The Message Service primarily focuses on facilitating email communication within the system. Its functionality is currently basic but can be improved upon. Key aspects of the Message Service include:
 
-- **Email Sending:** Handles the sending of emails to customers whit the help of Google smtp.
+- **Email Sending:** Handles the sending of emails to customers width the help of Google smtp.
 - **RabbitMQ Message Consumption:** Consumes messages from RabbitMQ, likely pertaining to order notifications and updates.
 - **Basic Formatting:** Performs basic formatting of messages before sending them to customers.
 
