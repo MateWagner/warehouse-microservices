@@ -86,7 +86,7 @@ The service also utilizes Spring Security OAuth2 for secure authentication and a
 
 The Message Service primarily focuses on facilitating email communication within the system. Its functionality is currently basic but can be improved upon. Key aspects of the Message Service include:
 
-- **Email Sending:** Handles the sending of emails to customers width the help of Google smtp.
+- **Email Sending:** Handles the sending of emails to customers with the help of Google smtp.
 - **RabbitMQ Message Consumption:** Consumes messages from RabbitMQ, likely pertaining to order notifications and updates.
 - **Basic Formatting:** Performs basic formatting of messages before sending them to customers.
 
